@@ -1,4 +1,4 @@
-class PageParser
+class PageGenerator
 
   def generate_instance_variables_from_html(options)
     if options.kind_of?(Hash)
@@ -37,13 +37,28 @@ class PageParser
     end
 
     puts "found (#{html_elements.length} elements)"
-
+    puts "class YourPageFile"
+    puts "\tdef initialize *browser\n\t\t@browser = *browser"
     html_elements.keys.sort.each do |key|
-      puts "@#{key} = \"#{html_elements[key]}\""
+      puts "\t\t@#{key} = \"#{html_elements[key]}\""
     end
+    puts "\tend"
+    count=1
     html_elements.keys.sort.each do |key|
-      print ":#{key}, "
+      if count == 1
+        print "\tattr_accessor :browser, "
+      end
+      if count % 5 == 0
+        print "\n\t"
+      end
+      if count != html_elements.length
+        print ":#{key}, "
+      else
+        print ":#{key}"
+      end
+      count = count + 1
     end
+    puts "\n\nend"
   end
 
   def get_source_and_print_elements(browser)

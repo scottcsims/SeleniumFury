@@ -1,11 +1,8 @@
 gem "selenium-client", ">=1.2.18"
 require "selenium/client"
 module CreateBrowserDriver
-  def browser
-    return @browser
-  end
 
-  def page
+  def browser
     return @browser
   end
 
