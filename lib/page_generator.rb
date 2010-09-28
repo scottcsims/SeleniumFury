@@ -1,4 +1,4 @@
-class PageGenerator
+module PageGenerator
 
   def generate_instance_variables_from_html(options)
     if options.kind_of?(Hash)
