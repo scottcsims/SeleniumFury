@@ -1,2 +1,2 @@
 require 'echoe'
-Echoe.new('gem_name')
+Echoe.new('selenium_fury')

@@ -1,6 +1,4 @@
-(RAP) is Ruby Automation Patterns
-
-Rap allows an automated tester to quickly build page files to use in the page object pattern.  Each page file represents
+Selenium Fury allows an automated tester to quickly build page files to use in the page object pattern.  Each page file represents
 a page under test with attributes of all the locators selenium needs to run tests on the page and methods that represent
 actions that can be performed on the page.
 
