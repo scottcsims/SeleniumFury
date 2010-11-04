@@ -14,6 +14,19 @@
 # * limitations under the License.
 # */
 module PageGenerator
+  def get_name_and_value(html_element)
+    if html_element.get_attribute("id") != nil
+      attribute_name =  html_element.get_attribute("id")
+      attribute_value = html_element.get_attribute("id")
+    elsif html_element.get_attribute("name") != nil
+      attribute_name =  html_element.get_attribute("name")
+      attribute_value = html_element.get_attribute("name")
+    elsif  html_element.get_attribute("title") != nil
+      attribute_name =  html_element.get_attribute("title")
+      attribute_value = html_element.get_attribute("title")
+    end
+    return attribute_name, attribute_value
+  end
 
   def generate_instance_variables_from_html(options)
     if options.kind_of?(Hash)
@@ -25,8 +38,7 @@ module PageGenerator
     html_elements = {}
     if (@locator_type=="css")
       doc.css(@locator).each do |html_element|
-        attribute_name =  html_element.get_attribute("id")
-        attribute_value = html_element.get_attribute("id")
+        attribute_name, attribute_value = get_name_and_value(html_element)
         if !attribute_name.nil?
           attribute_name.gsub!('input-', '')
           attribute_name.gsub!('select-', '')
