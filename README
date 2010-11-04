@@ -11,12 +11,15 @@ If there are missing locators you can then rerun the generator to generate new s
 
 
  == Generate
-
- * Fork the project.
+ *  See the examples directory for full syntax.
+ *  include PageGenerator
+ *  get_source_and_print_elements(browser)
 
 
  == Validate
-
+ *  See the examples directory for full syntax.
+ *  include PageValidator
+ *  check_page_file_class(YourPageFileClass, "/optional_relative_url_path")
 
  == Custom Configuration
 
