@@ -16,14 +16,4 @@ describe PageGenerator do
     browser.open "/ebayadvsearch"
     get_source_and_print_elements(browser)
   end
-
-  it "should create a nokogiri doc" do
-    doc = <<EOF
-     <a href="/index/1">First</a>
-EOF
-    @parser = Nokogiri.HTML doc
-    @parser.css("a").each do |html_element|
-      puts html_element
-    end
-  end
 end
