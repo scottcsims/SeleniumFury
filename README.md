@@ -22,7 +22,8 @@ Validate
 *  include PageValidator
 *  check_page_file_class(YourPageFileClass, "/optional_relative_url_path")
 
-== Custom Configuration
+Custom Configuration
+=========
 
 * Coming Soon
 
