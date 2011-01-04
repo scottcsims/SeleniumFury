@@ -90,6 +90,9 @@ module PageGenerator
 
   def get_source_and_print_elements(browser)
     html =browser.get_html_source
+    print_elements(html)
+  end
+  def print_elements(html)
     html_elements_select=generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "select")
     html_elements_text_area=generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "textarea")
     html_elements_form = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "form")
@@ -97,8 +100,9 @@ module PageGenerator
     html_elements_image = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "input[type='image']")
     html_elements_radio = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "input[type='radio']")
     html_elements_text = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "input[type='text']")
+    html_elements_submit = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "input[type='submit']")
     merge_and_print_elements([html_elements_check_boxes, html_elements_select, html_elements_text,
-                              html_elements_text_area, html_elements_image, html_elements_radio, html_elements_form])
+                              html_elements_text_area, html_elements_image, html_elements_radio, html_elements_form,html_elements_submit])
   end
 
 
