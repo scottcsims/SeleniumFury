@@ -96,13 +96,18 @@ module PageGenerator
     html_elements_select=generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "select")
     html_elements_text_area=generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "textarea")
     html_elements_form = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "form")
+    html_elements_buttons = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "input[type='button']")
+    html_elements_file = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "input[type='file']")
     html_elements_check_boxes = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "input[type='checkbox']")
-    html_elements_image = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "input[type='image']")
+    html_elements_password = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "input[type='password']")
     html_elements_radio = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "input[type='radio']")
-    html_elements_text = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "input[type='text']")
+    html_elements_reset = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "input[type='reset']")
+    html_elements_image = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "input[type='image']")
     html_elements_submit = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "input[type='submit']")
-    merge_and_print_elements([html_elements_check_boxes, html_elements_select, html_elements_text,
-                              html_elements_text_area, html_elements_image, html_elements_radio, html_elements_form,html_elements_submit])
+    html_elements_text = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "input[type='text']")
+    merge_and_print_elements([html_elements_check_boxes, html_elements_select, html_elements_text,html_elements_buttons,html_elements_file,
+                              html_elements_password,html_elements_text_area, html_elements_image, html_elements_radio,html_elements_reset,
+                              html_elements_form,html_elements_submit])
   end
 
 
