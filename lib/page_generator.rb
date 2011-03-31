@@ -14,6 +14,7 @@
 # * limitations under the License.
 # */
 module PageGenerator
+
   def get_name_and_value(html_element)
     if html_element.get_attribute("id") != nil
       attribute_name =  html_element.get_attribute("id")
@@ -62,7 +63,6 @@ module PageGenerator
     page_elements_types.each do |element_type|
       html_elements.merge!(element_type)
     end
-
     puts "found (#{html_elements.length} elements)"
     puts "class YourPageFile"
     puts "\tdef initialize *browser\n\t\t@browser = *browser"
