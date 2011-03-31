@@ -63,35 +63,38 @@ module PageGenerator
     page_elements_types.each do |element_type|
       html_elements.merge!(element_type)
     end
-    puts "found (#{html_elements.length} elements)"
-    puts "class YourPageFile"
-    puts "\tdef initialize *browser\n\t\t@browser = *browser"
+    $stdout.puts "found (#{html_elements.length} elements)"
+    $stdout.puts "class YourPageFile"
+    $stdout.puts "\tdef initialize *browser\n\t\t@browser = *browser"
     html_elements.keys.sort.each do |key|
-      puts "\t\t@#{key} = \"#{html_elements[key]}\""
+      $stdout.puts "\t\t@#{key} = \"#{html_elements[key]}\""
     end
-    puts "\tend"
+    $stdout.puts "\tend"
     count=1
     html_elements.keys.sort.each do |key|
       if count == 1
-        print "\tattr_accessor :browser, "
+        $stdout.print "\tattr_accessor :browser, "
       end
       if count % 5 == 0
-        print "\n\t"
+        $stdout.print "\n\t"
       end
       if count != html_elements.length
-        print ":#{key}, "
+        $stdout.print ":#{key}, "
       else
-        print ":#{key}"
+        $stdout.print ":#{key}"
       end
       count = count + 1
     end
-    puts "\n\nend"
+    $stdout.puts "\n\nend"
+
   end
+
 
   def get_source_and_print_elements(browser)
     html =browser.get_html_source
-    print_elements(html)
+    return print_elements(html)
   end
+
   def print_elements(html)
     html_elements_select=generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "select")
     html_elements_text_area=generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "textarea")
@@ -105,9 +108,12 @@ module PageGenerator
     html_elements_image = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "input[type='image']")
     html_elements_submit = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "input[type='submit']")
     html_elements_text = generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "input[type='text']")
-    merge_and_print_elements([html_elements_check_boxes, html_elements_select, html_elements_text,html_elements_buttons,html_elements_file,
-                              html_elements_password,html_elements_text_area, html_elements_image, html_elements_radio,html_elements_reset,
-                              html_elements_form,html_elements_submit])
+
+    elements = [html_elements_check_boxes, html_elements_select, html_elements_text, html_elements_buttons, html_elements_file,
+                html_elements_password, html_elements_text_area, html_elements_image, html_elements_radio, html_elements_reset,
+                html_elements_form, html_elements_submit]
+    merge_and_print_elements(elements)
+    return elements
   end
 
 

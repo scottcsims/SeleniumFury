@@ -8,8 +8,8 @@ require 'nokogiri'
 require File.dirname(__FILE__) + "/../lib/custom_generator"
 require File.dirname(__FILE__) + "/../lib/page_generator"
 require File.dirname(__FILE__) + "/../lib/page_validator"
+require File.dirname(__FILE__) + "/../lib/create_browser_driver"
 require File.dirname(__FILE__) + "/advanced_search_custom_generator_configuration"
-require File.dirname(__FILE__) + "/create_browser_driver"
 require File.dirname(__FILE__) + "/advanced_search"
 
 include CustomGenerator
