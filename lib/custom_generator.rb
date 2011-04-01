@@ -17,6 +17,10 @@ require File.dirname(__FILE__) + "/page_generator"
 require 'nokogiri'
 module CustomGenerator
   include PageGenerator
+#
+#   custom_configuration = options[:custom_configuration]
+#   browser = options[:browser]
+#   html = options[:html]
   def custom_generator(options)
     custom_configuration = options[:custom_configuration]
     browser = options[:browser]
