@@ -15,7 +15,8 @@
 # */
 require 'spec'
 module PageValidator
-
+  @found_missing_locators
+  attr_accessor :found_missing_locators
 
   def check_page_file_class(page_file_class, *live_url)
     missing_locators={}
@@ -34,8 +35,8 @@ module PageValidator
 
     #check for instance methods and execute.
     verify_instance_variables(test_page, missing_locators) if test_page.instance_variables.length > 0
+    @found_missing_locators=missing_locators
     print_missing_locators(missing_locators)
-
   end
 
 
