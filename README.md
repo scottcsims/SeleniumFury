@@ -11,21 +11,23 @@ If there are missing locators you can then rerun the generator to generate new s
 
 Generate
 =========
-*  See the examples directory for full syntax.
+*  See specs and features for full syntax
 *  include PageGenerator
 *  get_source_and_print_elements(browser)
 
 
 Validate
 =========
-*  See the examples directory for full syntax.
+*  See specs and features for full syntax.
 *  include PageValidator
 *  check_page_file_class(YourPageFileClass, "/optional_relative_url_path")
 
 Custom Configuration
 =========
 
-* Coming Soon
+* include CustomGenerator
+* create a custom configuration class
+* call custom_generator
 
 Core Team
 =========
