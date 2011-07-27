@@ -3,6 +3,5 @@ bin
 doc
 .yardoc
 Manifest
-selenium_fury.gemspec
 selenium_fury-0.5.2.gem
 
