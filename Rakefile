@@ -25,7 +25,7 @@ Jeweler::Tasks.new do |gem|
   gem.email = "ssims98@gmail.com"
   gem.authors = ["Scott Sims"]
   gem.homepage = "https://github.com/scottcsims/SeleniumFury"
-  gem.version = '0.5.4'
+  gem.version = '0.5.5'
   gem.add_dependency 'nokogiri'
 end
 
