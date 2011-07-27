@@ -13,6 +13,7 @@
 # * See the License for the specific language governing permissions and
 # * limitations under the License.
 # */
+
 module CustomGenerator
 # Use a custom configuration object to define a location strategy for a locators name and value
 # @param [Hash] options the options to use with a custom generator.
