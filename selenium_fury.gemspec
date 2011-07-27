@@ -37,6 +37,7 @@ Gem::Specification.new do |s|
     "lib/selenium_fury/custom_generator.rb",
     "lib/selenium_fury/page_generator.rb",
     "lib/selenium_fury/page_validator.rb",
+    "selenium_fury.gemspec",
     "spec/advanced_search.rb",
     "spec/advanced_search_custom_generator_configuration.rb",
     "spec/advanced_search_spec.rb",
