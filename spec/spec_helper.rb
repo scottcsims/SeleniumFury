@@ -1,19 +1,16 @@
+$:.unshift(File.dirname(__FILE__) + '/../lib')
+$:.unshift(File.dirname(__FILE__))
+
 require 'rubygems'
-gem "rspec", "=1.1.12"
-require "spec"
-gem "selenium-client", ">=1.2.18"
-require "selenium/client"
-require 'nokogiri'
+require 'bundler'
+Bundler.setup
+require "selenium_fury"
+require "advanced_search_custom_generator_configuration"
+require "advanced_search"
 
-require File.dirname(__FILE__) + "/../lib/custom_generator"
-require File.dirname(__FILE__) + "/../lib/page_generator"
-require File.dirname(__FILE__) + "/../lib/page_validator"
-require File.dirname(__FILE__) + "/../lib/create_browser_driver"
-require File.dirname(__FILE__) + "/advanced_search_custom_generator_configuration"
-require File.dirname(__FILE__) + "/advanced_search"
 
-include CustomGenerator
-include PageGenerator
-include PageValidator
-include CreateBrowserDriver
-
+RSpec.configure do |config|
+  config.after(:each) do
+    browser.close_current_browser_session if defined?(browser) && !browser.nil?
+  end
+end

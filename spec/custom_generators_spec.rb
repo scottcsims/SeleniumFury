@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + "/spec_helper"
+require "spec_helper"
 describe AdvancedSearchCustomGeneratorConfiguration do
   it "should generate the advanced search locators" do
     create_selenium_driver("http://www.homeaway.com")

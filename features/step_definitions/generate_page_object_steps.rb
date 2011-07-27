@@ -1,6 +1,3 @@
-require File.dirname(__FILE__) + "/require_helper"
-
-
 Given /^I am on the advanced search page for HomeAway$/ do
   create_selenium_driver("http://www.homeaway.com")
   browser.start_new_browser_session

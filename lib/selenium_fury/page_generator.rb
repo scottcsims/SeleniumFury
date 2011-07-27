@@ -15,25 +15,31 @@
 # */
 module PageGenerator
 
+  # @param html_element [String] a html element that could contain a id, name, or title.
   def get_name_and_value(html_element)
     if html_element.get_attribute("id") != nil
-      attribute_name =  html_element.get_attribute("id")
+      attribute_name = html_element.get_attribute("id")
       attribute_value = html_element.get_attribute("id")
     elsif html_element.get_attribute("name") != nil
-      attribute_name =  html_element.get_attribute("name")
+      attribute_name = html_element.get_attribute("name")
       attribute_value = html_element.get_attribute("name")
     elsif  html_element.get_attribute("title") != nil
-      attribute_name =  html_element.get_attribute("title")
+      attribute_name = html_element.get_attribute("title")
       attribute_value = html_element.get_attribute("title")
     end
     return attribute_name, attribute_value
   end
 
-  def generate_instance_variables_from_html(options)
-    if options.kind_of?(Hash)
-      @html = options[:html]
-      @locator_type = options[:locator_type]
-      @locator = options[:locator]
+# @param [Hash] opts the opts to use with a custom generator.
+# @option opts [String] :locator_type css or xpath
+# @option opts [String] :locator the html id,name, or title to be used as a selenium locator
+# @option opts [String] :html html from the page under test
+# @return [Hash] a list of variable names and locator values that can be used in a test
+  def generate_instance_variables_from_html(opts)
+    if opts.kind_of?(Hash)
+      @html = opts[:html]
+      @locator_type = opts[:locator_type]
+      @locator = opts[:locator]
     end
     doc = Nokogiri::HTML(@html)
     html_elements = {}
@@ -58,6 +64,8 @@ module PageGenerator
     return html_elements
   end
 
+    # Print the ruby class using the html elements we found from the page.
+    # @param page_elements_types [Array,Hash] an array of hashes for each type of found html element.
   def merge_and_print_elements(page_elements_types)
     html_elements={}
     page_elements_types.each do |element_type|
@@ -95,6 +103,8 @@ module PageGenerator
     return print_elements(html)
   end
 
+    # @param html [String] html source from your page
+    # @return [Hash,Array] an array of hashes for each type of found html element.
   def print_elements(html)
     html_elements_select=generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "select")
     html_elements_text_area=generate_instance_variables_from_html(:html =>html, :locator_type => "css", :locator => "textarea")

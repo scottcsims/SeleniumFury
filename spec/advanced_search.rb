@@ -12,6 +12,7 @@ class AdvancedSearch
     @special_offers = "specialOffers"
     @start_date_input = "startDateInput"
     @themes = "themes"
+    @search_key_words='searchKeywords'
 
     @air_conditioning = "amenity0.0"
     @beach = "location0.0"
@@ -49,6 +50,6 @@ class AdvancedSearch
                 :long_term_renters_welcome, :mountain, :near_the_ocean, :non_smoking_only, :pet_friendly,
                 :pool, :resort, :river, :rural, :satellite_or_cable_tv,
                 :skiing, :suitable_for_elderly_or_infirm, :town, :village, :washing_machine,
-                :waterfront, :wheelchair_accessible
+                :waterfront, :wheelchair_accessible, :search_key_words
 
 end

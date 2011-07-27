@@ -13,13 +13,12 @@
 # * See the License for the specific language governing permissions and
 # * limitations under the License.
 # */
-require "page_generator"
 module CustomGenerator
-  include PageGenerator
-#
-#   custom_configuration = options[:custom_configuration]
-#   browser = options[:browser]
-#   html = options[:html]
+# Use a custom configuration object to define a location strategy for a locators name and value
+# @param [Hash] options the options to use with a custom generator.
+# @option opts [CustomConfiguration] :custom_configuration a class that explains how to parse the page
+# @option opts [String] :browser the selenium driver
+# @option opts [String] :html html from the page under test
   def custom_generator(options)
     custom_configuration = options[:custom_configuration]
     browser = options[:browser]
@@ -43,7 +42,9 @@ module CustomGenerator
     merge_and_print_elements [html_menu_elements]
     return html_menu_elements
   end
-
+    # Parse the html attribute to a ruby variable
+    # @return [String]
+    # @param attribute_name [String] the html id,name, or title of an element
   def clean_attribute_name(attribute_name)
     attribute_name.gsub!('input-', '')
     attribute_name.gsub!('select-', '')

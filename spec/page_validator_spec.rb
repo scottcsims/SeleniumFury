@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + "/spec_helper"
+require "spec_helper"
 describe PageValidator do
   it "should validate the elements contained on the AdvancedSearch page object" do
     create_selenium_driver("http://www.homeaway.com")

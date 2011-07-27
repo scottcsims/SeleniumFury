@@ -13,7 +13,20 @@
 # * See the License for the specific language governing permissions and
 # * limitations under the License.
 # */
-require File.dirname(__FILE__) + "/page_generator"
-require File.dirname(__FILE__) + "/page_validator"
-require File.dirname(__FILE__) + "/custom_generator"
+
+require 'rubygems'
+require 'bundler'
+Bundler.setup
+require "rspec"
+require "selenium/client"
 require 'nokogiri'
+
+require "selenium_fury/page_generator"
+require "selenium_fury/custom_generator"
+require "selenium_fury/page_validator"
+require "selenium_fury/create_browser_driver"
+
+include CustomGenerator
+include PageGenerator
+include PageValidator
+include CreateBrowserDriver

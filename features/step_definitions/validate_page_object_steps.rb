@@ -1,6 +1,3 @@
-require File.dirname(__FILE__) + "/require_helper"
-require File.dirname(__FILE__) + "/../../spec/advanced_search"
-
 When /^I run the validator$/ do
   check_page_file_class(AdvancedSearch, "/searchForm")
 end

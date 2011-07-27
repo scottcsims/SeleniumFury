@@ -5,6 +5,8 @@ module CreateBrowserDriver
     return @browser
   end
 
+    # @param url [string]
+    # @return [Selenium::Client::Driver]
   def create_selenium_driver(url)
 
     @browser = Selenium::Client::Driver.new(

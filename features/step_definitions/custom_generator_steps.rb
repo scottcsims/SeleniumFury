@@ -1,6 +1,3 @@
-require File.dirname(__FILE__) + "/require_helper"
-require File.dirname(__FILE__) + "/../../spec/advanced_search_custom_generator_configuration"
-
 When /^I have a custom generator configuration class$/ do
   @advanced_search_custom_generator_configuration = AdvancedSearchCustomGeneratorConfiguration.new()
   @advanced_search_custom_generator_configuration.should_not be_nil
