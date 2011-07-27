@@ -1,14 +1,8 @@
-require 'spec'
 module CreateBrowserDriver
 
+  # @return [Selenium::Client::Driver]
   def browser
     return @browser
-  end
-
-  Spec::Runner.configure do |config|
-    config.after(:each) do
-      browser.close_current_browser_session if defined?(browser) && !browser.nil?
-    end
   end
 
   def create_selenium_driver(url)
