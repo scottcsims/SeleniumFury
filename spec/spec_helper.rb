@@ -5,6 +5,7 @@ require 'rubygems'
 require 'bundler'
 Bundler.setup
 require "selenium_fury"
+require "rspec"
 require "advanced_search_custom_generator_configuration"
 require "advanced_search"
 
