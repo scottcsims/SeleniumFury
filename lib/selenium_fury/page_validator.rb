@@ -13,7 +13,6 @@
 # * See the License for the specific language governing permissions and
 # * limitations under the License.
 # */
-require 'spec'
 module PageValidator
   @found_missing_locators
   attr_accessor :found_missing_locators
