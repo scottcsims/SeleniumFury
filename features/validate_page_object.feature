@@ -1,4 +1,5 @@
-Feature: As an automated tester I want a tool to check if my page object locators are correct so that I can update invalid locators.
+Feature: Validator
+  As an automated tester I want a tool to check if my page object locators are correct so that I can update invalid locators.
 
   Scenario: Use reflection to open a page object and validate that the locators are valid
     Given I am on the advanced search page for HomeAway

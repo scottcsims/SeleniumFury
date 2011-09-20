@@ -1,4 +1,5 @@
-Feature: As an automated tester I want to use a tool to find html elements on a web page so that I can reuse locators in in the page object pattern.
+Feature: Generator
+  As an automated tester I want to use a tool to find html elements on a web page so that I can reuse locators in in the page object pattern.
 
 
   Scenario: The generator produces a ruby class on standard out that reflects the ids of page elements that can be used as a page object.
