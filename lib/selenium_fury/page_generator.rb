@@ -125,6 +125,6 @@ module PageGenerator
     merge_and_print_elements(elements)
     return elements
   end
-
+  alias_method :generate, :get_source_and_print_elements
 
 end

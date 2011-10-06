@@ -5,6 +5,6 @@ describe PageGenerator do
     browser.start_new_browser_session
     puts "Testing #{browser.browser_url} on #{browser.browser_string} "
     browser.open "/searchForm"
-    get_source_and_print_elements(browser)
+    generate(browser)
   end
 end
