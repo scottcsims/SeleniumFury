@@ -17,6 +17,7 @@
 require 'rubygems'
 require 'bundler'
 Bundler.setup
+require "selenium/webdriver"
 require "selenium/client"
 require 'nokogiri'
 

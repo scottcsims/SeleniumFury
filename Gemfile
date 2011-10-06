@@ -1,6 +1,6 @@
 source :rubygems
 
-gem "selenium-client", :require => "selenium/client"
+gem "selenium-webdriver"
 gem "nokogiri"
 
 group :development do
