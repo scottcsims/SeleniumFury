@@ -24,9 +24,12 @@ require 'nokogiri'
 require "selenium_fury/page_generator"
 require "selenium_fury/custom_generator"
 require "selenium_fury/page_validator"
-require "selenium_fury/create_browser_driver"
+require "selenium_fury/create_selenium_client_driver"
+require "selenium_fury/create_selenium_web_driver"
+require "selenium_fury/page_object_components"
+require "selenium_fury/page_object"
 
 include CustomGenerator
 include PageGenerator
 include PageValidator
-include CreateBrowserDriver
+include CreateSeleniumClientDriver

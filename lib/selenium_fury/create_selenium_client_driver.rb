@@ -1,4 +1,4 @@
-module CreateBrowserDriver
+module CreateSeleniumClientDriver
 
   # @return [Selenium::Client::Driver]
   def browser
