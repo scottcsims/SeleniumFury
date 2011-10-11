@@ -2,21 +2,21 @@ require 'spec_helper'
 describe PageObject do
 
   it "should go to the home page using launch site" do
-    launch_site "http://stage.homeaway.com"
-    driver.current_url.should == "http://stage.homeaway.com/"
-    driver.navigate.to "http://stage.homeaway.com/vacation-rental/p254680"
-    driver.title.should == "Destin House for Rent: Santa's Workshop is a HomeAway Quality Assurance (TEST) Site"
+    launch_site "http://www.scottcsims.com"
+    driver.current_url.should == "http://scottcsims.com/wordpress/"
+    driver.navigate.to "http://www.scottcsims"
+    driver.title.should == "Scott Sims"
   end
 
   it 'should return a web_driver element when an attribute is accessed' do
-    launch_site "http://stage.homeaway.com/vacation-rental/p254680"
+    launch_site "http://www.homeaway.com/vacation-rental/p254680"
     inquiry_side_bar = InquirySideBar.new(driver)
     inquiry_side_bar.first_name.class.should == Selenium::WebDriver::Element
     inquiry_side_bar.first_name.send_keys Faker::Name.first_name
   end
 
   it "should raise an exception when the element can't be found'" do
-    launch_site "http://stage.homeaway.com/vacation-rental/p254680"
+    launch_site "http://www.homeaway.com/vacation-rental/p254680"
     inquiry_side_bar = InquirySideBar.new(driver)
     InquirySideBar.element(:not_a_element, {:id =>"not a element"})
     begin
@@ -28,7 +28,7 @@ describe PageObject do
   end
 
   it "should have a property page that contains a inquiry sidebar" do
-    launch_site "http://stage.homeaway.com/vacation-rental/p254680"
+    launch_site "http://www.homeaway.com/vacation-rental/p254680"
     property_page = PropertyPage.new(driver)
     property_page.should_not be_nil
     property_page.inquiry_side_bar.should_not be_nil
