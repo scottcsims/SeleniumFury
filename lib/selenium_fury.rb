@@ -29,8 +29,8 @@ require "selenium_fury/selenium_web_driver/create_selenium_web_driver"
 require "selenium_fury/selenium_web_driver/page_object_components"
 require "selenium_fury/selenium_web_driver/page_object"
 
-include CustomGenerator
-include PageGenerator
-include PageValidator
-include CreateSeleniumClientDriver
-include CreateSeleniumWebDriver
+include SeleniumFury::SeleniumClient::CustomGenerator
+include SeleniumFury::SeleniumClient::PageGenerator
+include SeleniumFury::SeleniumClient::PageValidator
+include SeleniumFury::SeleniumClient::CreateSeleniumClientDriver
+include SeleniumFury::SeleniumWebDriver::CreateSeleniumWebDriver

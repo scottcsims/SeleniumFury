@@ -13,9 +13,10 @@
 # * See the License for the specific language governing permissions and
 # * limitations under the License.
 # */
+
 class PageObject
-  include PageObjectComponents
-  include CreateSeleniumWebDriver
+  include SeleniumFury::SeleniumWebDriver::PageObjectComponents
+  include SeleniumFury::SeleniumWebDriver::CreateSeleniumWebDriver
 
   def initialize *driver
     @driver = *driver
@@ -25,3 +26,4 @@ class PageObject
     @driver
   end
 end
+
