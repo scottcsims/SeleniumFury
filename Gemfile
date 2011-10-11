@@ -12,6 +12,7 @@ group :development do
   gem "bundler"
   gem "builder"
   gem "rake"
+  gem "faker"
 end
 
 

@@ -21,15 +21,16 @@ require "selenium/webdriver"
 require "selenium/client"
 require 'nokogiri'
 
-require "selenium_fury/page_generator"
-require "selenium_fury/custom_generator"
-require "selenium_fury/page_validator"
-require "selenium_fury/create_selenium_client_driver"
-require "selenium_fury/create_selenium_web_driver"
-require "selenium_fury/page_object_components"
-require "selenium_fury/page_object"
+require "selenium_fury/selenium_client/page_generator"
+require "selenium_fury/selenium_client/custom_generator"
+require "selenium_fury/selenium_client/page_validator"
+require "selenium_fury/selenium_client/create_selenium_client_driver"
+require "selenium_fury/selenium_web_driver/create_selenium_web_driver"
+require "selenium_fury/selenium_web_driver/page_object_components"
+require "selenium_fury/selenium_web_driver/page_object"
 
 include CustomGenerator
 include PageGenerator
 include PageValidator
 include CreateSeleniumClientDriver
+include CreateSeleniumWebDriver
