@@ -30,9 +30,12 @@ require "selenium_fury/common/page_parser"
 require "selenium_fury/selenium_web_driver/create_selenium_web_driver"
 require "selenium_fury/selenium_web_driver/page_object_components"
 require "selenium_fury/selenium_web_driver/page_object"
+require "selenium_fury/selenium_web_driver/element_finder"
+require "selenium_fury/selenium_web_driver/page_generator"
 
 include SeleniumFury::SeleniumClient::CustomGenerator
 include SeleniumFury::SeleniumClient::PageGenerator
 include SeleniumFury::SeleniumClient::PageValidator
 include SeleniumFury::SeleniumClient::CreateSeleniumClientDriver
 include SeleniumFury::SeleniumWebDriver::CreateSeleniumWebDriver
+include SeleniumFury::SeleniumWebDriver::PageGenerator

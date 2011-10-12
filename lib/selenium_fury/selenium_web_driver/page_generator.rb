@@ -17,6 +17,31 @@ module SeleniumFury
   module SeleniumWebDriver
     module PageGenerator
 
+      # @return [String]
+      # @param page_object_attributes [Hash]
+      def print_selenium_web_driver_page_object(page_object_attributes)
+        result = ""
+        result += "found (#{page_object_attributes.length} elements)\n"
+        result += "class YourPageFile < PageObject\n"
+        page_object_attributes.keys.sort.each do |attribute_name|
+          result += "\t\telement :#{attribute_name} => {:#{page_object_attributes[attribute_name].keys[0]} => \"#{page_object_attributes[attribute_name].values[0]}\"}\n"
+        end
+        result += "\n\nend"
+        $stdout.puts result
+        return result
+      end
+
+
+# @param browser [Selenium::WebDriver::Driver]
+      def web_driver_generate(driver)
+        html =driver.page_source
+        nokogiri_elements = SeleniumFury::PageParser.new(html).nokogiri_elements
+        raise "The generator did not find nokogiri elements" unless nokogiri_elements
+        page_object_attributes = SeleniumFury::SeleniumWebDriver::ElementFinder.new(nokogiri_elements).web_driver_page_object_attributes
+        raise "The generator did not find page object attributes" if page_object_attributes.empty?
+        print_selenium_web_driver_page_object page_object_attributes
+      end
+
     end
   end
 end

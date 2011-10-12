@@ -1,19 +1,19 @@
 module SeleniumFury
-  module SeleniumClient
-    class LocatorFinder
+  module SeleniumWebDriver
+    class ElementFinder
       def initialize (nokogiri_elements)
         @nokogiri_elements=nokogiri_elements
-        @valid_locators=["id", "name", "title"]
+        @valid_locators=["id", "class", "name"]
       end
 
       attr_reader :nokogiri_elements, :valid_locators
 
-      def find_locators
+      def find_elements
         locators=[]
         nokogiri_elements.each do |nokogiri_element|
           valid_locators.each do |valid_locator|
             if nokogiri_element.get_attribute(valid_locator) != nil
-              locators.push(nokogiri_element.get_attribute(valid_locator))
+              locators.push({valid_locator.to_sym, nokogiri_element.get_attribute(valid_locator)})
               break
             end
           end
@@ -21,17 +21,17 @@ module SeleniumFury
         return locators
       end
 
-      def page_object_attributes
-        locators=find_locators
-        object_attributes ={}
+      def web_driver_page_object_attributes
+        locators=find_elements
+        generated_attributes ={}
         locators.each do |locator|
-          name=attribute_name(locator)
-          object_attributes[name] = locator
+          cleaned_name=clean_attribute_name(locator.values[0])
+          generated_attributes[cleaned_name] = locator
         end
-        return object_attributes
+        return generated_attributes
       end
 
-      def attribute_name name
+      def clean_attribute_name name
         if !name.nil?
           find_and_replace_patterns = [[/([A-Z]+)/, '_\1'],
                                        ['input-', ''],

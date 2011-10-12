@@ -19,7 +19,7 @@ module SeleniumFury
 
       # @return [String]
       # @param html_elements [Hash]
-      def print_page_object(html_elements)
+      def print_selenium_client_page_object(html_elements)
         result = ""
         result += "found (#{html_elements.length} elements)\n"
         result += "class YourPageFile\n"
@@ -49,14 +49,14 @@ module SeleniumFury
       end
 
 
+      # @param browser [Selenium::Client::Driver]
       def get_source_and_print_elements(browser)
         html =browser.get_html_source
         nokogiri_elements = SeleniumFury::PageParser.new(html).nokogiri_elements
         raise "The generator did not find nokogiri elements" unless nokogiri_elements
         page_object_attributes = SeleniumFury::SeleniumClient::LocatorFinder.new(nokogiri_elements).page_object_attributes
         raise "The generator did not find page object attributes" if page_object_attributes.empty?
-        print_page_object page_object_attributes
-        #return print_elements(html)
+        print_selenium_client_page_object page_object_attributes
       end
 
       alias_method :generate, :get_source_and_print_elements
