@@ -41,8 +41,7 @@ module SeleniumFury
           puts "@#{generated_name} = \"#{generated_value}\"" if $DEBUG
           html_menu_elements[generated_name]= generated_value
         end
-        merge_and_print_elements [html_menu_elements]
-        return html_menu_elements
+        return print_page_object(html_menu_elements)
       end
 
       # Parse the html attribute to a ruby variable

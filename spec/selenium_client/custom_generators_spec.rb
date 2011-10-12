@@ -6,7 +6,8 @@ describe AdvancedSearchCustomGeneratorConfiguration do
     puts "Testing #{browser.browser_url} on #{browser.browser_string} "
     browser.open "/searchForm"
     advanced_search_custom_generator_configuration = AdvancedSearchCustomGeneratorConfiguration.new
-    custom_generator(:browser => browser,
+    result = custom_generator(:browser => browser,
                      :custom_configuration => advanced_search_custom_generator_configuration)
+    result.should include("found (26 elements)")
   end
 end
