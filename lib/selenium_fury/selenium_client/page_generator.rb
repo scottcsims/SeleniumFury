@@ -58,9 +58,6 @@ module SeleniumFury
         raise "The generator did not find page object attributes" if page_object_attributes.empty?
         print_selenium_client_page_object page_object_attributes
       end
-
-      alias_method :generate, :get_source_and_print_elements
-
     end
   end
 end

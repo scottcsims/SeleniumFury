@@ -16,7 +16,9 @@
 module SeleniumFury
   module SeleniumWebDriver
     module PageValidator
+           def web_driver_validate(page_object, *live_url)
 
+           end
     end
   end
 end

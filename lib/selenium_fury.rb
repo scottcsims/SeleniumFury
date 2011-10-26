@@ -27,13 +27,15 @@ require "selenium_fury/selenium_client/page_validator"
 require "selenium_fury/selenium_client/create_selenium_client_driver"
 require "selenium_fury/selenium_client/locator_finder"
 require "selenium_fury/common/page_parser"
+require "selenium_fury/common/selenium_api_chooser"
 require "selenium_fury/selenium_web_driver/create_selenium_web_driver"
+require "selenium_fury/selenium_web_driver/element_finder"
 require "selenium_fury/selenium_web_driver/page_object_components"
 require "selenium_fury/selenium_web_driver/page_object"
-require "selenium_fury/selenium_web_driver/element_finder"
 require "selenium_fury/selenium_web_driver/page_generator"
 require "selenium_fury/selenium_web_driver/page_validator"
 
+include SeleniumFury::SeleniumApiChooser
 include SeleniumFury::SeleniumClient::CreateSeleniumClientDriver
 include SeleniumFury::SeleniumClient::CustomGenerator
 include SeleniumFury::SeleniumClient::PageGenerator

@@ -16,7 +16,6 @@
 module SeleniumFury
   module SeleniumClient
     module CreateSeleniumClientDriver
-
       # @return [Selenium::Client::Driver]
       def browser
         return @browser
@@ -33,6 +32,7 @@ module SeleniumFury
             :url => url,
             :timeout_in_second => 60)
       end
+      alias_method :create_selenium_client_driver, :create_selenium_driver
     end
   end
 end

@@ -4,6 +4,6 @@ describe SeleniumFury::SeleniumClient::PageValidator do
     create_selenium_driver("http://www.homeaway.com")
     browser.start_new_browser_session
     puts "Testing #{browser.browser_url} on #{browser.browser_string} "
-    validate(AdvancedSearch, "/searchForm")
+    web_driver_validate(AdvancedSearch, "/searchForm")
   end
 end

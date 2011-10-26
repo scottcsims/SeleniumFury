@@ -111,7 +111,7 @@ module SeleniumFury
         end
       end
 
-      alias_method :validate, :check_page_file_class
+
 
     end
   end

@@ -13,6 +13,7 @@
 # * See the License for the specific language governing permissions and
 # * limitations under the License.
 # */
+
 module SeleniumFury
   module SeleniumWebDriver
     module CreateSeleniumWebDriver
@@ -24,10 +25,11 @@ module SeleniumFury
 
       # @param url [string]
       # @return [Selenium::WebDriver::Driver]
-      def launch_site url
+      def launch_web_driver url
         @driver = Selenium::WebDriver.for :firefox
         @driver.navigate.to url
       end
+
     end
   end
 end
