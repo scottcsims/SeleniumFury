@@ -32,10 +32,13 @@ require "selenium_fury/selenium_web_driver/page_object_components"
 require "selenium_fury/selenium_web_driver/page_object"
 require "selenium_fury/selenium_web_driver/element_finder"
 require "selenium_fury/selenium_web_driver/page_generator"
+require "selenium_fury/selenium_web_driver/page_validator"
 
+include SeleniumFury::SeleniumClient::CreateSeleniumClientDriver
 include SeleniumFury::SeleniumClient::CustomGenerator
 include SeleniumFury::SeleniumClient::PageGenerator
 include SeleniumFury::SeleniumClient::PageValidator
-include SeleniumFury::SeleniumClient::CreateSeleniumClientDriver
+
 include SeleniumFury::SeleniumWebDriver::CreateSeleniumWebDriver
 include SeleniumFury::SeleniumWebDriver::PageGenerator
+include SeleniumFury::SeleniumWebDriver::PageValidator
