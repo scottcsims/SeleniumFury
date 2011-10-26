@@ -11,6 +11,7 @@ require "selenium_client/advanced_search_custom_generator_configuration"
 require "selenium_client/advanced_search"
 require "selenium_web_driver/inquiry_side_bar"
 require "selenium_web_driver/property_page"
+require "selenium_web_driver/advanced_search"
 
 RSpec.configure do |config|
   config.after(:each) do

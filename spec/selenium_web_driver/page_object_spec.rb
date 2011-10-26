@@ -45,5 +45,10 @@ describe PageObject do
     end
     e.should_not be_nil, "we were expecting and exception"
   end
-
+    it "should use elements on the HomeAway advanced search page" do
+    launch_site("http://www.homeaway.com/searchForm")
+    advanced_search = AdvancedSearchWebDriver.new(driver)
+    advanced_search.amenity0_0.click
+    advanced_search.adv_search_form.submit
+  end
 end
