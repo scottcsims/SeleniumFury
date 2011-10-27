@@ -43,7 +43,7 @@ class AdvancedSearch
 
   end
 
-  attr_accessor :browser, :adv_search_form, :bathrooms, :bedrooms, :end_date_input, :start_date_input, :price_from, :price_to,
+  attr_reader :browser, :adv_search_form, :bathrooms, :bedrooms, :end_date_input, :start_date_input, :price_from, :price_to,
                 :property_type, :sleeps, :special_offers, :start_date_input, :themes,
                 :air_conditioning, :beach, :children_welcome, :dishwasher,
                 :downtown, :fishing, :golf, :internet_access, :lake,

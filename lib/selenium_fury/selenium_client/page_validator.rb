@@ -18,17 +18,18 @@ module SeleniumFury
     module PageValidator
       @found_missing_locators
       attr_accessor :found_missing_locators
-# @param page_file_class [Class] The page object class you want to test
-# @param live_url [String] the url of the page your testing
+      # @param page_file_class [Class] The page object class you want to test
+      # @param live_url [String] the url of the page your testing
       def check_page_file_class(page_file_class, *live_url)
+        raise "cannot access the selenium client driver" if browser.nil?
         missing_locators={}
         puts "Validating the #{page_file_class} class"
         #all initialize methods of page files should have *browser specified as the argument. This is an optional argument
-        test_page = page_file_class.new(@browser)
-        test_page.should_not be_nil
-        #skip the open if we don't need to open the url agian
-        if !live_url.empty?
-          $stderr.puts "Opening  #{@browser.browser_url}/#{live_url}" if $DEBUG
+        test_page = page_file_class.new(browser)
+        raise "The test class is nil" if test_page.nil?
+        #skip the open if we don't need to open the url again
+        unless live_url.empty?
+          puts "Opening  #{browser.browser_url}/#{live_url}" #if $DEBUG
           browser.open live_url
         end
 
@@ -38,7 +39,7 @@ module SeleniumFury
         #check for instance methods and execute.
         verify_instance_variables(test_page, missing_locators) if test_page.instance_variables.length > 0
         @found_missing_locators=missing_locators
-        print_missing_locators(missing_locators)
+        return print_missing_locators(missing_locators)
       end
 
 
@@ -48,7 +49,7 @@ module SeleniumFury
         missing_locators.each_pair do |locator_name, locator_value|
           puts "     #{locator_name} =>  #{locator_value}"
         end
-        missing_locators.should have(0).missing_locators
+        raise "found missing locators" unless missing_locators.empty?
       end
 
       def attribute_name_filter locator_name
@@ -77,7 +78,7 @@ module SeleniumFury
           begin
             browser.wait_for_element(locator_value.call, {:timeout_in_seconds => "5"})
           rescue
-            puts "    -----------------------------------    Could not find #{locator_name}"
+            puts "    -----------------------------------    Could not find '#{locator_name}'"
           end
           missing_locators[locator_name]= locator_value.call if !browser.element?(locator_value.call) # Use the value of the instance variable
         end
@@ -99,10 +100,9 @@ module SeleniumFury
           next if (test_page.method(locator_name).call.class.to_s != "String")
           puts "     Validating the #{locator_name} page element locator" #chomp the @ sign off of the method name.
           locator_value = test_page.method(locator_name) # Create the reference to the get method of the instance variable
-
           #Now validate the page
           begin
-            browser.wait_for_element(locator_value.call, {:timeout_in_seconds => "5"})
+              browser.wait_for_element(locator_value.call, {:timeout_in_seconds => "5"})
           rescue
             puts "    -----------------------------------          Could not find #{locator_name}"
           end
@@ -110,7 +110,6 @@ module SeleniumFury
 
         end
       end
-
 
 
     end

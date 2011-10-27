@@ -1,9 +1,8 @@
 When /^I run the validator$/ do
-  check_page_file_class(AdvancedSearch, "/searchForm")
+  validate(AdvancedSearch, "/searchForm")
 end
 Then /^the advanced search page object locators will be checked$/ do
-  found_missing_locators.should have(0).elements
-  found_missing_locators.should_not be_nil
+  @found_missing_locators.should have(0).elements
 end
 When /^I run the validator with missing locators$/ do
   class AdvancedSearchBroken < AdvancedSearch
@@ -20,5 +19,6 @@ When /^I run the validator with missing locators$/ do
   end
 end
 Then /^there will be missing locators found$/ do
-  found_missing_locators["missing_locator_attribute"].should == "missing_locator"
+  @found_missing_locators.should have(1).elements
+  @found_missing_locators["missing_locator_attribute"].should == "missing_locator"
 end
