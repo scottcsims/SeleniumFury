@@ -100,9 +100,9 @@ module SeleniumFury
           next if (test_page.method(locator_name).call.class.to_s != "String")
           puts "     Validating the #{locator_name} page element locator" #chomp the @ sign off of the method name.
           locator_value = test_page.method(locator_name) # Create the reference to the get method of the instance variable
-          #Now validate the page
+                                                                          #Now validate the page
           begin
-              browser.wait_for_element(locator_value.call, {:timeout_in_seconds => "5"})
+            browser.wait_for_element(locator_value.call, {:timeout_in_seconds => "5"})
           rescue
             puts "    -----------------------------------          Could not find #{locator_name}"
           end

@@ -30,8 +30,15 @@ module SeleniumFury
             missing_elements.push(web_drive_element_name)
           end
         end
-        return missing_elements
+        if missing_elements.length > 0
+          puts "Missing Elements:"
+          missing_elements.each do |element|
+            puts element
+          end
+        end
+        raise "Found Missing Elements" if missing_elements.length > 0
       end
+
     end
   end
 end
