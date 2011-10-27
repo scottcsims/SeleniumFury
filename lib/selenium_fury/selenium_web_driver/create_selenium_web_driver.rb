@@ -18,7 +18,7 @@ module SeleniumFury
   module SeleniumWebDriver
     module CreateSeleniumWebDriver
 
-      # @return [Selenium::WebDriver::Driver]
+      #@return [Selenium::WebDriver::Driver]
       def driver
         return @driver
       end

@@ -52,4 +52,9 @@ describe PageObject do
     advanced_search.adv_search_form.submit
   end
 
+  it "should use methods on the HomeAway advanced search page" do
+    launch_web_driver("http://www.homeaway.com/searchForm")
+    advanced_search = AdvancedSearchWebDriver.new(driver)
+    advanced_search.click_one_item
+  end
 end

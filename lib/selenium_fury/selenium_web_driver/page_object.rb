@@ -22,8 +22,5 @@ class PageObject
     @driver = *driver
   end
 
-  def driver
-    @driver
-  end
 end
 

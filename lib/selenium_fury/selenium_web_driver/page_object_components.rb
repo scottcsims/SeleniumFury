@@ -28,11 +28,13 @@ module SeleniumFury
 # @param element_hash [Hash]
 # @param opts [Hash]
 # @return [Selenium::WebDriver::Element]
-        def element(element_sym, element_hash, opts={})
-
-          @transient_elements ||= []
+        def elements
           @elements ||= []
+        end
 
+
+        def element(element_sym, element_hash, opts={})
+          #@transient_elements ||= []
           # define a new method with the name of the symbol after locator that returns the value
           send :define_method, element_sym do
             wait = Selenium::WebDriver::Wait.new(:timeout => 10) # seconds
@@ -44,8 +46,8 @@ module SeleniumFury
           end
 
           # keep a running track of all elements and transient elements
-          @elements << element_sym
-          @transient_elements << element_hash if opts[:transient]
+          elements << element_sym
+          #@transient_elements << element_hash if opts[:transient]
 
         end
 

@@ -1,10 +1,21 @@
 require "spec_helper"
 describe SeleniumFury::SeleniumWebDriver::PageValidator do
-  it "should find elements on the HomeAway advanced search page" do
+  it "should find a missing element" do
+    class MissingElement < PageObject
+      element :not_a_element1, {:id=>"not a element1"}
+      element :not_a_element2, {:id=>"not a element2"}
+    end
     launch_web_driver("http://www.homeaway.com/searchForm")
-    advanced_search = AdvancedSearchWebDriver.new(driver)
-    advanced_search.amenity0_0.click
-    web_driver_validate(AdvancedSearchWebDriver)
-    advanced_search.adv_search_form.submit
+    result=web_driver_validate(MissingElement)
+    result.should include(:not_a_element1)
+    result.should include(:not_a_element2)
+    result.should have(2).missing_elements
+
   end
+  it "should validate elements" do
+      launch_web_driver("http://www.homeaway.com/searchForm")
+      result=web_driver_validate(AdvancedSearchWebDriver)
+      result.should have(0).missing_elements
+    end
+
 end

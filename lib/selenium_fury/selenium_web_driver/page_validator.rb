@@ -16,9 +16,22 @@
 module SeleniumFury
   module SeleniumWebDriver
     module PageValidator
-           def web_driver_validate(page_object, *live_url)
-
-           end
+      def web_driver_validate(page_class)
+        missing_elements=[]
+        puts "class #{page_class}"
+        page_object=page_class.new(driver)
+        raise "Could not find web driver elements in #{page_class}" if page_class.elements.nil?
+        page_class.elements.each do |web_drive_element_name|
+          puts "\tValidating #{web_drive_element_name}"
+          begin
+            page_object.method(web_drive_element_name).call
+          rescue
+            puts "\t\t\tCould not find #{web_drive_element_name}"
+            missing_elements.push(web_drive_element_name)
+          end
+        end
+        return missing_elements
+      end
     end
   end
 end
