@@ -15,8 +15,7 @@ describe SeleniumFury::SeleniumWebDriver::PageValidator do
 
   it "should validate elements" do
     launch_web_driver("http://www.homeaway.com/searchForm")
-    result=web_driver_validate(AdvancedSearchWebDriver)
-    result.should have(0).missing_elements
+    web_driver_validate(AdvancedSearchWebDriver)
   end
 
 end

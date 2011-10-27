@@ -23,9 +23,9 @@ Jeweler::Tasks.new do |gem|
  all of the selenium locators you are using in your page file and return a list of the locators that it could not find.
  If there are missing locators you can then rerun the generator to generate new selenium locators for your page. http://www.scottcsims.com}
   gem.email = "ssims98@gmail.com"
-  gem.authors = ["Scott Sims"]
+  gem.authors = ["Scott Sims","Tim Tischler"]
   gem.homepage = "https://github.com/scottcsims/SeleniumFury"
-  gem.version = '0.5.5'
+  gem.version = '0.5.6'
   gem.add_dependency 'nokogiri'
 end
 
