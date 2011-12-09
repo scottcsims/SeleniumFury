@@ -6,6 +6,6 @@ describe SeleniumFury::SeleniumClient::PageGenerator do
     puts "Testing #{browser.browser_url} on #{browser.browser_string} "
     browser.open "/searchForm"
     result = generate(browser)
-    result.should include("found (39 elements)")
+    result.should include("found (43 elements)")
   end
 end

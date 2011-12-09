@@ -8,6 +8,6 @@ describe AdvancedSearchCustomGeneratorConfiguration do
     advanced_search_custom_generator_configuration = AdvancedSearchCustomGeneratorConfiguration.new
     result = custom_generator(:browser => browser,
                      :custom_configuration => advanced_search_custom_generator_configuration)
-    result.should include("found (26 elements)")
+    result.should include("found (30 elements)")
   end
 end
