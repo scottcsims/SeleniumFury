@@ -12,20 +12,17 @@ If there are missing locators you can then rerun the generator to generate new s
 Generate
 =========
 *  See specs and features for full syntax
-*  include PageGenerator
-*  get_source_and_print_elements(browser)
+*  generate(browser)
 
 
 Validate
 =========
 *  See specs and features for full syntax.
-*  include PageValidator
-*  check_page_file_class(YourPageFileClass, "/optional_relative_url_path")
+*  validate(YourPageFileClass, "/optional_relative_url_path")
 
 Custom Configuration
 =========
 
-* include CustomGenerator
 * create a custom configuration class
 * call custom_generator
 
@@ -36,6 +33,6 @@ Core Team
 
 Copyright
 =========
-* Copyright (c) 2010 HomeAway, Inc.
+* Copyright (c) 2011 HomeAway, Inc.
 * All rights reserved.  http://www.homeaway.com
   See LICENSE for details.

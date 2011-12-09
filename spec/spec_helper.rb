@@ -15,7 +15,9 @@ require "selenium_web_driver/advanced_search"
 
 RSpec.configure do |config|
   config.after(:each) do
-    browser.close_current_browser_session if !browser.nil?
-    driver.quit if !driver.nil?
+    browser.close_current_browser_session unless(browser.nil? || browser.session_id.nil?)
+    driver.quit unless driver.nil?
   end
+  config.include SeleniumFury::SeleniumClient::CreateSeleniumClientDriver
+  config.include SeleniumFury::SeleniumWebDriver::CreateSeleniumWebDriver
 end
