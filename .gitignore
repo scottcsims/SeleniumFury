@@ -4,4 +4,5 @@ doc
 .yardoc
 Manifest
 pkg
+Gemfile.lock
 
