@@ -7,7 +7,7 @@ group :development do
   gem 'yard'
   gem 'jeweler'
   gem 'rdiscount'
-  gem "rspec"
+  gem "rspec","2.7.0"
   gem "cucumber"
   gem "bundler"
   gem "builder"

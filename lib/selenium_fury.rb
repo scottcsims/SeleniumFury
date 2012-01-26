@@ -13,6 +13,7 @@
 # * See the License for the specific language governing permissions and
 # * limitations under the License.
 # */
+$:.unshift(File.dirname(__FILE__))
 
 require 'rubygems'
 require 'bundler'
