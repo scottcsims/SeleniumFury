@@ -1,7 +1,7 @@
 ###v0.5.8
 ####Enhancements
 
-*  New method get_page_object creates a page object instance populated wiht elements found on the current page
+*  New method get_page_object creates a page object instance populated with elements found on the current page
 
 [full changelog](https://github.com/scottcsims/SeleniumFury/compare/v0.5.7...v0.5.8)
 
