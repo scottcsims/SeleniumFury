@@ -7,24 +7,25 @@ describe PageObject do
     driver.navigate.to "http://www.scottcsims"
     driver.title.should == "Scott Sims"
   end
-
+  it "should have elements" do
+    launch_web_driver "http://www.homeaway.com"
+    search=get_page_object(driver, 'Search')
+    search.class.elements.should_not be_nil
+    search.class.elements.should have(8).elements
+    search.method(search.class.elements[0]).call.class.should == Selenium::WebDriver::Element
+  end
   it 'should return a web_driver element when an attribute is accessed' do
-    launch_web_driver "http://www.homeaway.com/vacation-rental/p254680"
-    inquiry_side_bar = InquirySideBar.new(driver)
-    inquiry_side_bar.first_name.class.should == Selenium::WebDriver::Element
-    inquiry_side_bar.first_name.send_keys Faker::Name.first_name
+    launch_web_driver "http://www.homeaway.com"
+    search=get_page_object(driver, 'Search')
+    search.start_date_input.class.should == Selenium::WebDriver::Element
+    search.search_keywords Faker::Lorem.words
   end
 
   it "should raise an exception when the element can't be found'" do
-    launch_web_driver "http://www.homeaway.com/vacation-rental/p254680"
-    inquiry_side_bar = InquirySideBar.new(driver)
-    InquirySideBar.element(:not_a_element, {:id =>"not a element"})
-    begin
-      inquiry_side_bar.not_a_element
-    rescue Exception => e
-      e.message.should == "Could not find element not_a_element"
-    end
-    e.should_not be_nil, "we were expecting an exception"
+    launch_web_driver "http://www.homeaway.com"
+    search=get_page_object(driver, 'Search')
+    Search.element(:not_a_element, {:id =>"not a element"})
+    lambda{search.not_a_element}.should(raise_exception(RuntimeError,"Could not find element not_a_element"))
   end
 
   it "should have a property page that contains a inquiry sidebar" do
@@ -32,18 +33,12 @@ describe PageObject do
     property_page = PropertyPage.new(driver)
     property_page.should_not be_nil
     property_page.inquiry_side_bar.should_not be_nil
-    property_page.inquiry_side_bar.first_name.class.should == Selenium::WebDriver::Element
   end
 
   it "should have an error if a non page object class is passed to page method" do
     property_page = PropertyPage.new()
     PropertyPage.page(:not_a_page, String)
-    begin
-      property_page.not_a_page
-    rescue Exception => e
-      e.message.should == "String does not inherit from PageObject"
-    end
-    e.should_not be_nil, "we were expecting and exception"
+    lambda{property_page.not_a_page}.should raise_exception(RuntimeError,"String does not inherit from PageObject")
   end
   it "should use elements on the HomeAway advanced search page" do
     launch_web_driver("http://www.homeaway.com/searchForm")

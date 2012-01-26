@@ -19,10 +19,10 @@ module SeleniumFury
 
       # @return [String]
       # @param page_object_attributes [Hash]
-      def print_selenium_web_driver_page_object(page_object_attributes)
+      def print_selenium_web_driver_page_object(page_object_attributes,class_name='YourPageFile')
         result = ""
         result += "found (#{page_object_attributes.length} elements)\n"
-        result += "class YourPageFile < PageObject\n"
+        result += "class #{class_name} < PageObject\n"
         page_object_attributes.keys.sort.each do |attribute_name|
           result += "\t\telement :#{attribute_name}, {:#{page_object_attributes[attribute_name].keys[0]} => \"#{page_object_attributes[attribute_name].values[0]}\"}\n"
         end
@@ -31,8 +31,22 @@ module SeleniumFury
         return result
       end
 
+# @param page_object_attributes [Hash]
+# @param class_name [String]
+# @return [PageObject]
+      def selenium_web_driver_page_object(page_object_attributes, class_name)
+        klass = Class.new(PageObject) {
+          page_object_attributes.keys.sort.each do |attribute_name|
+            element attribute_name.to_sym, {page_object_attributes[attribute_name].keys[0] => page_object_attributes[attribute_name].values[0]}
+          end
+        }
+        print_selenium_web_driver_page_object page_object_attributes,class_name
+        return Object.const_set(class_name, klass).new(driver)
 
-# @param browser [Selenium::WebDriver::Driver]
+      end
+
+# @param driver [Selenium::WebDriver::Driver]
+# @return [String]
       def web_driver_generate(driver)
         html =driver.page_source
         nokogiri_elements = SeleniumFury::PageParser.new(html).nokogiri_elements
@@ -42,6 +56,17 @@ module SeleniumFury
         print_selenium_web_driver_page_object page_object_attributes
       end
 
+# @param driver [Selenium::WebDriver::Driver]
+# @param class_name [string]
+# @return [PageObject]
+      def get_page_object(driver, class_name)
+        html =driver.page_source
+        nokogiri_elements = SeleniumFury::PageParser.new(html).nokogiri_elements
+        raise "The generator did not find nokogiri elements" unless nokogiri_elements
+        page_object_attributes = SeleniumFury::SeleniumWebDriver::ElementFinder.new(nokogiri_elements).web_driver_page_object_attributes
+        raise "The generator did not find page object attributes" if page_object_attributes.empty?
+        selenium_web_driver_page_object(page_object_attributes, class_name)
+      end
     end
   end
 end
