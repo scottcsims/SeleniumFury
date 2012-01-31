@@ -1,3 +1,9 @@
+###v0.5.9
+####Enhancements
+
+*  Bug fix for validate() when using web driver
+
+[full changelog](https://github.com/scottcsims/SeleniumFury/compare/v0.5.8...v0.5.9)
 ###v0.5.8
 ####Enhancements
 

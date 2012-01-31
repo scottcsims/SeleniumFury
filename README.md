@@ -41,7 +41,7 @@ Validate Demo
 ```ruby
 launch_web_driver("http://www.homeaway.com/")
 get_page_object(driver,'HomePage')
-web_driver_validate(HomePage)
+validate(HomePage)
 driver.quit
 ```
  * [Scott Sims](http://scottcsims.com/): Current maintainer.
