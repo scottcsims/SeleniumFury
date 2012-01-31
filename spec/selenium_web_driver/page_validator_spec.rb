@@ -6,16 +6,12 @@ describe SeleniumFury::SeleniumWebDriver::PageValidator do
       element :not_a_element1, {:id=>"not a element1"}
     end
     launch_web_driver("http://www.homeaway.com/searchForm")
-    begin
-      web_driver_validate(MissingElement)
-    rescue Exception => e
-      e.message.should == "Found Missing Elements"
-    end
+    lambda{web_driver_validate(MissingElement)}.should raise_exception(RuntimeError,"Found Missing Elements")
   end
 
   it "should validate elements" do
     launch_web_driver("http://www.homeaway.com/searchForm")
-    web_driver_validate(AdvancedSearchWebDriver)
+    validate(AdvancedSearchWebDriver)
   end
 
 end
