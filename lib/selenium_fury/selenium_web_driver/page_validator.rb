@@ -37,7 +37,7 @@ module SeleniumFury
             puts element
           end
         end
-        raise "Found Missing Elements" if missing_elements.length > 0
+        raise "Found Missing Elements: #{missing_elements.inspect}" if missing_elements.length > 0
       end
 
     end
