@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "selenium_fury"
-  s.version = "0.5.11"
+  s.version = "0.5.12"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Scott Sims", "Tim Tischler"]
-  s.date = "2012-05-01"
+  s.date = "2012-06-27"
   s.description = "Generate and validate page objects with this page object factory for Selenium."
   s.email = "ssims98@gmail.com"
   s.extra_rdoc_files = [
@@ -67,7 +67,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "https://github.com/scottcsims/SeleniumFury"
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.21"
+  s.rubygems_version = "1.8.24"
   s.summary = "Selenium Fury allows an automated tester to quickly build page files to use in the page object pattern.  Each page file represents a page under test with attributes of all the locators selenium needs to run tests on the page and methods that represent actions that can be performed on the page.  You use the generator to build the page files. After the page has been updated you can use the validator to go through all of the selenium locators you are using in your page file and return a list of the locators that it could not find. If there are missing locators you can then rerun the generator to generate new selenium locators for your page. http://www.scottcsims.com"
 
   if s.respond_to? :specification_version then
