@@ -13,7 +13,7 @@ module SeleniumFury
         nokogiri_elements.each do |nokogiri_element|
           valid_locators.each do |valid_locator|
             if nokogiri_element.get_attribute(valid_locator) != nil
-              locators.push({valid_locator.to_sym, nokogiri_element.get_attribute(valid_locator)})
+              locators.push({valid_locator.to_sym => nokogiri_element.get_attribute(valid_locator)})
               break
             end
           end
