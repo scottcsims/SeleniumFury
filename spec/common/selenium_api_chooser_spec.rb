@@ -2,22 +2,22 @@ require 'spec_helper'
 describe SeleniumFury::SeleniumApiChooser do
   context "Finding generate/validate methods" do
     it "should find the generator for selenium client tests" do
-      create_selenium_client_driver "http://www.scottcsims.com"
+      create_selenium_client_driver TEST_PAGE_URL
       should_receive(:get_source_and_print_elements)
       generate(browser)
     end
     it "should find the generator for selenium web_driver tests" do
-      launch_web_driver "http://www.scottcsims.com"
+      launch_web_driver TEST_PAGE_URL
       should_receive(:web_driver_generate)
       generate(driver)
     end
     it "should find the validator for selenium client tests" do
-      create_selenium_client_driver "http://www.scottcsims.com"
+      create_selenium_client_driver TEST_PAGE_URL
       should_receive(:check_page_file_class).with(NilClass)
       validate(NilClass)
     end
     it "should find the validator for selenium web driver tests" do
-      launch_web_driver "http://www.scottcsims.com"
+      launch_web_driver TEST_PAGE_URL
       should_receive(:web_driver_validate).with(NilClass)
       validate(NilClass)
     end

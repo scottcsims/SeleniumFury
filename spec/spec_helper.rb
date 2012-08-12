@@ -12,6 +12,8 @@ require "selenium_client/advanced_search"
 require "selenium_web_driver/inquiry_side_bar"
 require "selenium_web_driver/property_page"
 require "selenium_web_driver/advanced_search"
+require "selenium_web_driver/test_page"
+TEST_PAGE_URL="file:///"+File.dirname(__FILE__) + "/test_page/test_page.html"
 include SeleniumFury::SeleniumWebDriver::CreateSeleniumWebDriver
 include SeleniumFury::SeleniumClient::CreateSeleniumClientDriver
 RSpec.configure do |config|
