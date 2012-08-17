@@ -8,7 +8,7 @@ require "rspec"
 require "test_page/test_page_custom_generator_configuration"
 require "test_page/test_page_rc"
 
-TEST_PAGE_URL="file:///"+File.dirname(__FILE__) + "/test_page/test_page.html"
+TEST_PAGE_URL="file://"+File.dirname(__FILE__) + "/test_page/test_page.html"
 include SeleniumFury::SeleniumWebDriver::CreateSeleniumWebDriver
 include SeleniumFury::SeleniumClient::CreateSeleniumClientDriver
 

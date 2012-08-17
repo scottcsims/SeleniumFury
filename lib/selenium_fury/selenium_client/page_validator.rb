@@ -20,7 +20,7 @@ module SeleniumFury
       attr_accessor :found_missing_locators
       # @param page_file_class [Class] The page object class you want to test
       # @param live_url [String] the url of the page your testing
-      def check_page_file_class(page_file_class, *live_url)
+      def check_page_file_class(page_file_class, live_url = nil)
         raise "cannot access the selenium client driver" if browser.nil?
         missing_locators={}
         puts "Validating the #{page_file_class} class"
@@ -28,7 +28,7 @@ module SeleniumFury
         test_page = page_file_class.new(browser)
         raise "The test class is nil" if test_page.nil?
         #skip the open if we don't need to open the url again
-        unless live_url.empty?
+        if live_url
           puts "Opening  #{browser.browser_url}/#{live_url}" #if $DEBUG
           browser.open live_url
         end
