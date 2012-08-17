@@ -1,20 +1,70 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
     <title>SeleniumFury Test Page</title>
+    <script type="text/javascript">
+        function displayMessage() {
+           document.getElementById('message').innerHTML = document.form.msgtext.value
+        }
+    </script>
 </head>
 <body>
-<form id="form">
-    <label>textarea</label><textarea id="textarea"> </textarea><br>
-    <label>select</label><select id="select"></select><br>
-    <label>input</label><input id="input"><br>
-    <label>button</label><input id="input button" type="button"><br>
-    <label>file</label><input id="input file" type="file"><br>
-    <label>checkbox</label><input id="input checkbox" type="checkbox"><br>
-    <label>radio</label><input id="input radio" type="radio"><br>
-    <label>reset</label><input id="input reset" type="reset"><br>
-    <label>image</label><input id="input image" type="image"><br>
-    <label>submit</label><input id="input submit" type="submit"><br>
-    <label>text</label><input id="input text" type="text"><br>
+
+<div id="message"></div>
+
+<form id="form" name="form">
+    <label for="textarea">Textarea</label>
+    <textarea id="textarea">This is a textarea field.
+    </textarea>
+    <br/>
+    <label for="select">Select</label>
+    <select id="select">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option>
+    </select>
+    <br/>
+    <label for="input_button">Button</label>
+    <input id="input_button" type="button" value="Click me"/>
+    <br/>
+    <label for="input_checkbox">Checkbox</label>
+    <input id="input_checkbox" type="checkbox"/>
+    <br/>
+    <label for="input_file">File</label>
+    <input id="input_file" type="file"/>
+    <br/>
+    <input id="input_hidden" type="hidden"/>
+    <br/>
+    <label for="input_image">Image</label>
+    <input id="input_image" type="image" alt="input image"/>
+    <br/>
+    <label for="input_password">Password</label>
+    <input id="input_password" type="password"/>
+    <br/>
+    <label for="input_radio">Radio</label>
+    <input id="input_radio" type="radio"/>
+    <br/>
+    <label for="input_reset">Reset</label>
+    <input id="input_reset" type="reset"/>
+    <br/>
+    <label for="input_submit">Submit</label>
+    <input id="input_submit" type="submit"/>
+    <br/>
+    <label for="input_text">Text</label>
+    <input id="input_text" type="text"/>
+    <br/>
+    <fieldset>
+        <legend>Input test:</legend>
+        <label for="input_message">Message Text:</label>
+        <input id="input_message" name="msgtext" type="text" />
+        <br/>
+        <input id="input_msg_button" type="button" value="Click me" onClick="displayMessage()"/>
+    </fieldset>
 </form>
+<a id="link111111" href="http://news.ycombinator.com/">Link 1</a>
+<a id="link222222" href="http://yahoo.com">Link 2</a>
+<a id="link333333" href="http://google.com">Link 3</a>
 </body>
 </html>

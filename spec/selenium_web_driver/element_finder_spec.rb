@@ -1,4 +1,4 @@
-require "spec_helper"
+require 'spec_helper'
 describe SeleniumFury::SeleniumWebDriver::ElementFinder do
   it "should find elements" do
     html="<input id='myTestId1'><input name='myTestId2'>"

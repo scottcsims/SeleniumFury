@@ -24,16 +24,16 @@ describe SeleniumFury::SeleniumApiChooser do
   end
   context "Integrating with generator/validator methods" do
     it "should find generate method for selenium client tests" do
-      create_selenium_driver "http://www.scottcsims.com"
+      create_selenium_driver TEST_PAGE_URL
       browser.start_new_browser_session
-      browser.open "/"
-      generate(browser).should include("found (9 elements)")
+      browser.open TEST_PAGE_URL
+      generate(browser).should include("found (15 elements)")
     end
     it "should find validate method for selenium client tests" do
-      create_selenium_driver("http://www.homeaway.com")
+      create_selenium_driver TEST_PAGE_URL
       browser.start_new_browser_session
       puts "Testing #{browser.browser_url} on #{browser.browser_string} "
-      validate(AdvancedSearch, "/searchForm")
+      validate(TestPage, TEST_PAGE_URL)
     end
     it "should have found missing locators in module", SeleniumFury::SeleniumApiChooser do
       SeleniumFury::SeleniumClient::PageValidator.respond_to?(:found_missing_locators).should be_true

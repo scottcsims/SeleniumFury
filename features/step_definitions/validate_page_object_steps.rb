@@ -1,11 +1,11 @@
 When /^I run the validator$/ do
-  validate(AdvancedSearch, "/searchForm")
+  validate(TestPageRc, TEST_PAGE_URL)
 end
-Then /^the advanced search page object locators will be checked$/ do
+Then /^the test page object locators will be checked$/ do
   @found_missing_locators.should have(0).elements
 end
 When /^I run the validator with missing locators$/ do
-  class AdvancedSearchBroken < AdvancedSearch
+  class TestPageRcBroken < TestPageRc
     def initialize *browser
       super
       @missing_locator_attribute="missing_locator"
@@ -14,7 +14,7 @@ When /^I run the validator with missing locators$/ do
     attr_reader :missing_locator_attribute
   end
   begin
-    check_page_file_class(AdvancedSearchBroken, "/searchForm")
+    check_page_file_class(TestPageRcBroken,TEST_PAGE_URL)
   rescue Exception=>e
   end
 end
