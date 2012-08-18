@@ -66,13 +66,14 @@ module SeleniumFury
       def verify_instance_variables(test_page, missing_locators)
         #test_page.print_properties browser
         test_page.instance_variables.each do |locator_name|
+          locator_name_string = locator_name.to_s
           #prepare the locator values
-          locator_name.slice!(0)
-          if attribute_name_filter(locator_name)
+          locator_name_string.slice!(0)
+          if attribute_name_filter(locator_name_string)
             puts "Skipping validation for #{locator_name}"
             next
           end
-          next if (test_page.method(locator_name).call.class.to_s != "String")
+          next if (test_page.method(locator_name_string).class.to_s != "String")
           puts "     Validating the #{locator_name} page element locator" #chomp the @ sign off of the method name.
           locator_value = test_page.method(locator_name) # Create the reference to the get method of the instance variable
           begin
@@ -88,16 +89,17 @@ module SeleniumFury
       # @param missing_locators [Hash]
       def verify_class_variables(test_page, missing_locators)
         test_page.public_methods(all=false).each do |locator_name|
+          locator_name_string = locator_name.to_s
           #Only operate with the set methods not the get methods
-          next if (!locator_name.include?("="))
+          next if (!locator_name_string.include?("="))
 
-          locator_name.slice!(locator_name.length-1)
+          locator_name_string.slice!(locator_name_string.length-1)
 
-          if attribute_name_filter(locator_name)
-            puts "Skipping validation for #{locator_name}"
+          if attribute_name_filter(locator_name_string)
+            puts "Skipping validation for #{locator_name_string}"
             next
           end
-          next if (test_page.method(locator_name).call.class.to_s != "String")
+          next if (test_page.method(locator_name).class.to_s != "String")
           puts "     Validating the #{locator_name} page element locator" #chomp the @ sign off of the method name.
           locator_value = test_page.method(locator_name) # Create the reference to the get method of the instance variable
                                                                           #Now validate the page

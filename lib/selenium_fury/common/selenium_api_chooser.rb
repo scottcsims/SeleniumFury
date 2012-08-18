@@ -10,12 +10,9 @@ module SeleniumFury
     end
 
     def validate(page_object, live_url = nil)
-      if defined?(browser)
-        unless browser.nil?
-          return check_page_file_class(page_object, live_url)
-        end
-      end
-      unless driver.nil?
+      if browser
+        return check_page_file_class(page_object, live_url)
+      else
         return web_driver_validate(page_object)
       end
     end
