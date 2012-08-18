@@ -3,7 +3,7 @@ describe SeleniumFury::SeleniumClient::PageValidator do
   it "should validate the elements contained on the TestPage page object" do
     create_selenium_driver TEST_PAGE_URL
     browser.start_new_browser_session
-    validate(TestPage, TEST_PAGE_URL)
+    validate(TestPageRc, TEST_PAGE_URL)
     @found_missing_locators.should_not be_nil
     @found_missing_locators.should have(0).missing_locators
   end
