@@ -33,11 +33,9 @@ module SeleniumFury
           browser.open live_url
         end
 
-        #check for class methods and execute.
-        verify_class_variables(test_page, missing_locators) if test_page.public_methods(all=false).length > 0
-
         #check for instance methods and execute.
         verify_instance_variables(test_page, missing_locators) if test_page.instance_variables.length > 0
+
         @found_missing_locators=missing_locators
         return print_missing_locators(missing_locators)
       end
@@ -69,47 +67,22 @@ module SeleniumFury
           locator_name_string = locator_name.to_s
           #prepare the locator values
           locator_name_string.slice!(0)
+
           if attribute_name_filter(locator_name_string)
             puts "Skipping validation for #{locator_name}"
             next
           end
-          next if (test_page.method(locator_name_string).class.to_s != "String")
+
+          # I don't understand where this would ever be true, but I'll leave it I guess?
+          # next if (test_page.method(locator_name_string.to_sym).class.to_s != "String")
           puts "     Validating the #{locator_name} page element locator" #chomp the @ sign off of the method name.
-          locator_value = test_page.method(locator_name) # Create the reference to the get method of the instance variable
+          locator_value = test_page.method(locator_name_string.to_sym) # Create the reference to the get method of the instance variable
           begin
             browser.wait_for_element(locator_value.call, {:timeout_in_seconds => "5"})
           rescue
             puts "    -----------------------------------    Could not find '#{locator_name}'"
+            missing_locators[locator_name_string]= locator_value.call
           end
-          missing_locators[locator_name]= locator_value.call if !browser.element?(locator_value.call) # Use the value of the instance variable
-        end
-      end
-
-      # @param test_page [Object] an instantiated page object
-      # @param missing_locators [Hash]
-      def verify_class_variables(test_page, missing_locators)
-        test_page.public_methods(all=false).each do |locator_name|
-          locator_name_string = locator_name.to_s
-          #Only operate with the set methods not the get methods
-          next if (!locator_name_string.include?("="))
-
-          locator_name_string.slice!(locator_name_string.length-1)
-
-          if attribute_name_filter(locator_name_string)
-            puts "Skipping validation for #{locator_name_string}"
-            next
-          end
-          next if (test_page.method(locator_name).class.to_s != "String")
-          puts "     Validating the #{locator_name} page element locator" #chomp the @ sign off of the method name.
-          locator_value = test_page.method(locator_name) # Create the reference to the get method of the instance variable
-                                                                          #Now validate the page
-          begin
-            browser.wait_for_element(locator_value.call, {:timeout_in_seconds => "5"})
-          rescue
-            puts "    -----------------------------------          Could not find #{locator_name}"
-          end
-          missing_locators[locator_name]= locator_value.call if !browser.element?(locator_value.call) # Use the value of the instance variable
-
         end
       end
 

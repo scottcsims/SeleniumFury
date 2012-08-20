@@ -1,9 +1,7 @@
 require 'rubygems'
 require 'bundler'
-Bundler.setup
-require "selenium_fury"
-require "faker"
-require "rspec"
+
+require 'selenium_fury'
 
 require "test_page/test_page_custom_generator_configuration"
 require "test_page/test_page_rc"
