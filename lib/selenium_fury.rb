@@ -13,13 +13,12 @@
 # * See the License for the specific language governing permissions and
 # * limitations under the License.
 # */
-$:.unshift(File.dirname(__FILE__))
 
 require 'rubygems'
 require 'bundler'
-Bundler.setup
-require "selenium/webdriver"
-require "selenium/client"
+
+require "selenium-webdriver"
+require "selenium-client"
 require 'nokogiri'
 
 require "selenium_fury/selenium_client/page_generator"

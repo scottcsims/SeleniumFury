@@ -18,8 +18,8 @@ class PageObject
   include SeleniumFury::SeleniumWebDriver::PageObjectComponents
   include SeleniumFury::SeleniumWebDriver::CreateSeleniumWebDriver
 
-  def initialize *driver
-    @driver = *driver
+  def initialize driver = nil
+    @driver = driver
   end
 
 end
