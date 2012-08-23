@@ -1,8 +1,8 @@
-Given /^I am on the advanced search page for HomeAway$/ do
-  create_selenium_driver("http://www.homeaway.com")
+Given /^I am on the test page$/ do
+  create_selenium_driver TEST_PAGE_URL
   browser.start_new_browser_session
   puts "Testing #{browser.browser_url} on #{browser.browser_string} "
-  browser.open "/searchForm"
+  browser.open TEST_PAGE_URL
 end
 
 When /^I run the generator$/ do

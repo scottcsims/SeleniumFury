@@ -2,7 +2,7 @@ Feature: Custom Generator
   As an automated tester I want to create a page object with variable names that reflect business terms so the our test will reflect ubiquitous language.
 
   Scenario: Use a custom generator configuration object to specify how to name our variables from another source than the id
-    Given I am on the advanced search page for HomeAway
+    Given I am on the test page
     When I have a custom generator configuration class
     And  I run the custom generator
     Then I will have a ruby class produced that I can use as a page object
