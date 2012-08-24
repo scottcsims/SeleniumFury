@@ -57,7 +57,7 @@ module SeleniumFury
 # @return [PageObject]
         def page(page_sym, page_class)
           send :define_method, page_sym do
-            raise "#{page_class} does not inherit from PageObject" unless page_class.superclass == PageObject
+            raise "#{page_class.to_s} does not inherit from PageObject" unless page_class.superclass == PageObject
             page_class.new(driver)
           end
         end

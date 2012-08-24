@@ -44,6 +44,7 @@ module SeleniumFury
           count = count + 1
         end
         result += "\n\nend"
+        result += "\n"
         $stdout.puts result
         return result
       end
