@@ -13,8 +13,8 @@ describe SeleniumFury::SeleniumApiChooser do
     end
     it "should find the validator for selenium client tests" do
       create_selenium_client_driver TEST_PAGE_URL
-      should_receive(:check_page_file_class).with(NilClass, nil)
-      validate(NilClass, nil)
+      should_receive(:check_page_file_class).with(NilClass)
+      validate(NilClass)
     end
     it "should find the validator for selenium web driver tests" do
       launch_web_driver TEST_PAGE_URL
