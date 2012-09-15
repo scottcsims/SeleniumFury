@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "selenium_fury"
-  s.version = "0.6.0"
+  s.version = "0.6.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Scott Sims", "Tim Tischler"]
-  s.date = "2012-08-24"
+  s.date = "2012-09-15"
   s.description = "Generate and validate page objects with this page object factory for Selenium."
   s.email = "ssims98@gmail.com"
   s.extra_rdoc_files = [
@@ -46,6 +46,7 @@ Gem::Specification.new do |s|
     "lib/selenium_fury/selenium_web_driver/page_object.rb",
     "lib/selenium_fury/selenium_web_driver/page_object_components.rb",
     "lib/selenium_fury/selenium_web_driver/page_validator.rb",
+    "selenium_fury.gemspec",
     "spec/common/page_parser_spec.rb",
     "spec/common/selenium_api_chooser_spec.rb",
     "spec/selenium_client/custom_generators_spec.rb",
