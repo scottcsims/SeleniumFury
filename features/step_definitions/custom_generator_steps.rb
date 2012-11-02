@@ -3,9 +3,7 @@ When /^I have a custom generator configuration class$/ do
   @test_page_custom_generator_configuration.should_not be_nil
 end
 When /^I run the custom generator$/ do
-  @found_element_ids=custom_generator(:browser => browser,
-                                      :custom_configuration => @test_page_custom_generator_configuration)
-
+pending
 end
 When /^I specify a selector attribute$/ do
   @test_page_custom_generator_configuration.selector.should_not be_nil

@@ -21,11 +21,6 @@ require "selenium-webdriver"
 require "selenium-client"
 require 'nokogiri'
 
-require "selenium_fury/selenium_client/page_generator"
-require "selenium_fury/selenium_client/custom_generator"
-require "selenium_fury/selenium_client/page_validator"
-require "selenium_fury/selenium_client/create_selenium_client_driver"
-require "selenium_fury/selenium_client/locator_finder"
 require "selenium_fury/common/page_parser"
 require "selenium_fury/common/selenium_api_chooser"
 require "selenium_fury/selenium_web_driver/create_selenium_web_driver"
@@ -34,10 +29,6 @@ require "selenium_fury/selenium_web_driver/page_object_components"
 require "selenium_fury/selenium_web_driver/page_object"
 require "selenium_fury/selenium_web_driver/page_generator"
 require "selenium_fury/selenium_web_driver/page_validator"
-
-include SeleniumFury::SeleniumClient::CustomGenerator
-include SeleniumFury::SeleniumClient::PageGenerator
-include SeleniumFury::SeleniumClient::PageValidator
 
 include SeleniumFury::SeleniumWebDriver::PageGenerator
 include SeleniumFury::SeleniumWebDriver::PageValidator

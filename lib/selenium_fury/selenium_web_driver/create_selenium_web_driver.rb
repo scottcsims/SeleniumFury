@@ -26,7 +26,7 @@ module SeleniumFury
       # @param url [string]
       # @return [Selenium::WebDriver::Driver]
       def launch_web_driver url
-        @driver = Selenium::WebDriver.for :firefox
+        @driver = Selenium::WebDriver.for :chrome
         @driver.navigate.to url
       end
 
