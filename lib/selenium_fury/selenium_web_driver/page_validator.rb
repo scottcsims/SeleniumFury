@@ -17,8 +17,9 @@ module SeleniumFury
   module SeleniumWebDriver
     module PageValidator
       def web_driver_validate(page_class)
-        raise("Cannot find driver")  if driver.nil?
+        raise("Cannot find driver") if driver.nil?
         missing_elements=[]
+        validated_elements=[]
         puts "class #{page_class}"
         page_object=page_class.new(driver)
         raise "Could not find web driver elements in #{page_class}" if page_class.elements.nil?

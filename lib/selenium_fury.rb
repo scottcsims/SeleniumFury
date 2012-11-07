@@ -14,6 +14,7 @@
 # * limitations under the License.
 # */
 
+require "selenium_fury/version"
 require 'rubygems'
 require 'bundler'
 

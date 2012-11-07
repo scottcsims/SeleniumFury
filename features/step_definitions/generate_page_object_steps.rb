@@ -7,5 +7,5 @@ When /^I run the generator$/ do
 end
 
 Then /^I will have a ruby class produced that I can use as a page object$/ do
-  @found_element_ids.should_not be_nil
+  @found_element_ids.should include('found (15 elements)')
 end

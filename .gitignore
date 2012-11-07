@@ -1,5 +1,6 @@
 .idea
 .yardoc
+chromedriver.log
 bin
 Manifest
 tmp

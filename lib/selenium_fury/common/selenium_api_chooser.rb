@@ -24,6 +24,9 @@ module SeleniumFury
       end
     end
 
+    # @return [Array] validated page elements
+    # @param [PageObject] page_object
+    # @param [string] live_url
     def validate(page_object, live_url = nil)
       if defined?(browser)
         unless browser.nil?

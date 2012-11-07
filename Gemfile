@@ -1,20 +1,5 @@
 source :rubygems
 
-gem "selenium-webdriver"
-gem "nokogiri"
-
-group :development do
-  gem 'yard'
-  gem 'jeweler'
-  gem 'rdiscount'
-  gem "rspec"
-  gem "cucumber"
-  gem "bundler"
-  gem "builder"
-  gem "rake"
-  gem "faker"
-end
-
-
-
+# Specify your gem's dependencies in selenium_fury.gemspec
+gemspec
 
