@@ -13,3 +13,4 @@ lib/bundler/man
 Gemfile.lock
 InstalledFiles
 coverage
+pkg
