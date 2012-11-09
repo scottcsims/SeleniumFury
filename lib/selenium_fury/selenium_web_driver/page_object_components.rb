@@ -51,9 +51,6 @@ module SeleniumFury
 
         end
 
-# @method page(page_sym, page_class)
-# @param page_sym [:Symbol]
-# @param page_class [Class]
 # @return [PageObject]
         def page(page_sym, page_class)
           send :define_method, page_sym do
