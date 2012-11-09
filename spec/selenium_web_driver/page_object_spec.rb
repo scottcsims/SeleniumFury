@@ -8,7 +8,9 @@ describe SeleniumFury::SeleniumWebDriver::CreateSeleniumWebDriver do
 end
 
 describe PageObject do
-
+  after(:each) do
+    Object.instance_eval { remove_const :TestPage } if Object.const_defined? :TestPage
+  end
   specify "has Selenium::WebDriver::Elements defined with the element method" do
     launch_web_driver TEST_PAGE_URL
     test_page = TestPage.new(driver)
@@ -37,10 +39,8 @@ describe PageObject do
   end
 
   specify "PageObject provides a method to return all Selenium::WebDriver::Element defined in the class" do
-    Object.instance_eval { remove_const :TestPage } if Object.const_defined? :TestPage
     launch_web_driver TEST_PAGE_URL
-    #test_page = TestPage.new(driver)
-    test_page = get_page_object(driver, 'TestPage')
+    test_page = TestPage.new(driver)
     test_page.class.elements.should_not be_nil
     test_page.class.elements.should have(15).elements
     test_page.method(test_page.class.elements[0]).call.class.should == Selenium::WebDriver::Element
