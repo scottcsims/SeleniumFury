@@ -24,7 +24,7 @@ module SeleniumFury
         result += "found (#{page_object_attributes.length} elements)\n"
         result += "class #{class_name} < PageObject\n"
         page_object_attributes.keys.sort.each do |attribute_name|
-          result += "\t\telement :#{attribute_name}, {:#{page_object_attributes[attribute_name].keys[0]} => \"#{page_object_attributes[attribute_name].values[0]}\"}\n"
+          result += "\t\telement :#{attribute_name}, {#{page_object_attributes[attribute_name].keys[0]}: \"#{page_object_attributes[attribute_name].values[0]}\"}\n"
         end
         result += "\n\nend"
         $stdout.puts result

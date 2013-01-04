@@ -4,7 +4,7 @@ describe SeleniumFury::SeleniumWebDriver::PageGenerator do
     launch_web_driver TEST_PAGE_URL
     result = generate(driver)
     result.should include 'found (15 elements)'
-    result.should include 'element :form, {:id => "form"}'
+    result.should include 'element :form, {id: "form"}'
   end
   it "should return a TestPage page object" do
     launch_web_driver TEST_PAGE_URL
