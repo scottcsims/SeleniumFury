@@ -7,7 +7,7 @@ describe SeleniumFury::SeleniumWebDriver::PageValidator do
       element :not_a_element2, {:id => "not a element2"}
     end
     launch_web_driver TEST_PAGE_URL
-    expect { web_driver_validate(MissingElement) }.to raise_exception RuntimeError, "Found Missing Elements: [:not_a_element1, :not_a_element2]"
+    expect { validate(MissingElement) }.to raise_exception RuntimeError, "Found Missing Elements: [:not_a_element1, :not_a_element2]"
   end
 
   it "should validate elements" do

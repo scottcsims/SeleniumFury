@@ -37,7 +37,7 @@ module SeleniumFury
           #@transient_elements ||= []
           # define a new method with the name of the symbol after locator that returns the value
           send :define_method, element_sym do
-            wait = Selenium::WebDriver::Wait.new(:timeout => 10) # seconds
+            wait = Selenium::WebDriver::Wait.new(:timeout => 0.5) # seconds
             begin
               wait.until { driver.find_element element_hash }
             rescue Selenium::WebDriver::Error::TimeOutError
