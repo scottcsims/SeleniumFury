@@ -15,10 +15,9 @@ Cucumber::Rake::Task.new(:feature)
 YARD::Rake::YardocTask.new do |t|
   t.files = ['lib/**/*.rb']
 end
+task :default => :spec
 
-task :default do
-  system "rake spec"
-end
+
 
 #desc 'Push gem to gem server'
 #  task 'release' => ['gem:build', 'gem:git:release'] do
