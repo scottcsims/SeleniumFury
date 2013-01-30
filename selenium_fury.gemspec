@@ -17,7 +17,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency('nokogiri')
   gem.add_development_dependency('rspec','~>2.12')
   gem.add_development_dependency('cucumber')
-  gem.add_development_dependency('yard')
   gem.add_development_dependency('redcarpet')
   gem.add_development_dependency('rake')
 end

@@ -6,15 +6,12 @@ require 'rspec'
 require 'rspec/core/rake_task'
 require 'cucumber'
 require 'cucumber/rake/task'
-require 'yard'
-require 'yard/rake/yardoc_task'
+
 require "bundler/gem_tasks"
 
 RSpec::Core::RakeTask.new(:spec)
 Cucumber::Rake::Task.new(:feature)
-YARD::Rake::YardocTask.new do |t|
-  t.files = ['lib/**/*.rb']
-end
+
 task :default => :spec
 
 
