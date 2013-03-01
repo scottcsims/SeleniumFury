@@ -52,4 +52,22 @@ describe PageObject do
     TestPage.element :not_a_element, {:id => "not a element"}
     expect { test_page.not_a_element }.to raise_exception RuntimeError, "Could not find element not_a_element"
   end
+
+  describe "#element_list" do
+    context 'when there are elements found' do
+      it "should return an array of Selenium::WebDriver::Elements" do
+        launch_web_driver TEST_PAGE_URL
+        test_page = TestPage.new(driver)
+        test_page.listings.should be_an Array
+      end
+    end
+    context 'when there are not elements found' do
+      it "should i dunno" do
+        launch_web_driver TEST_PAGE_URL
+        test_page = TestPage.new(driver)
+        TestPage.element_list :cats, { id: 'meow' }
+        expect { test_page.cats }.to raise_error RuntimeError
+      end
+    end
+  end
 end

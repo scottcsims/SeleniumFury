@@ -15,6 +15,8 @@ class TestPage < PageObject
   element :select, {:id => "select"}
   element :textarea, {:id => "textarea"}
 
+  element_list :listings, { css: 'li.listing' }
+
   def click_check_box
     input_checkbox.click
   end
