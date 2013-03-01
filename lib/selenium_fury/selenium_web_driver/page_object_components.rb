@@ -22,17 +22,17 @@ module SeleniumFury
       end
 
       module ClassMethods
-# this is a method on the class now
-#@method element(element_sym, element_hash, opts={})
-# @param element_sym [:Symbol]
-# @param element_hash [Hash]
-# @param opts [Hash]
-# @return [Selenium::WebDriver::Element]
+        
         def elements
           @elements ||= []
         end
 
-
+        # this is a method on the class now
+        # @method element(element_sym, element_hash, opts={})
+        # @param element_sym [:Symbol]
+        # @param element_hash [Hash]
+        # @param opts [Hash]
+        # @return [Selenium::WebDriver::Element]
         def element(element_sym, element_hash, opts={})
           #@transient_elements ||= []
           # define a new method with the name of the symbol after locator that returns the value
@@ -48,10 +48,21 @@ module SeleniumFury
           # keep a running track of all elements and transient elements
           elements << element_sym
           #@transient_elements << element_hash if opts[:transient]
-
         end
 
-# @return [PageObject]
+        def element_list(element_sym, element_hash, opts={})
+          send :define_method, element_sym do
+            wait = Selenium::WebDriver::Wait.new(timeout: 0.5)
+            begin
+              wait.until { !driver.find_elements(element_hash).empty? }
+              driver.find_elements(element_hash)
+            rescue Selenium::WebDriver::Error::TimeOutError
+              raise "Could not find any elements like #{element_sym}"
+            end
+          end 
+        end      
+
+        # @return [PageObject]
         def page(page_sym, page_class)
           send :define_method, page_sym do
             raise "#{page_class.to_s} does not inherit from PageObject" unless page_class.superclass == PageObject
