@@ -33,15 +33,15 @@ module SeleniumFury
         # @param element_hash [Hash]
         # @param opts [Hash]
         # @return [Selenium::WebDriver::Element]
-        def element(element_sym, element_hash, opts={})
+        def element(element_sym, element_hash, opts={timeout: 0.5})
           #@transient_elements ||= []
           # define a new method with the name of the symbol after locator that returns the value
           send :define_method, element_sym do
-            wait = Selenium::WebDriver::Wait.new(:timeout => 0.5) # seconds
+            wait = Selenium::WebDriver::Wait.new(timeout: opts[:timeout]) # seconds
             begin
               wait.until { driver.find_element element_hash }
             rescue Selenium::WebDriver::Error::TimeOutError
-              raise "Could not find element #{element_sym}"
+              raise "Could not find element #{element_sym} (Waited #{opts[:timeout]} seconds.)"
             end
           end
 
@@ -50,14 +50,14 @@ module SeleniumFury
           #@transient_elements << element_hash if opts[:transient]
         end
 
-        def element_list(element_sym, element_hash, opts={})
+        def element_list(element_sym, element_hash, opts={timeout: 0.5})
           send :define_method, element_sym do
-            wait = Selenium::WebDriver::Wait.new(timeout: 0.5)
+            wait = Selenium::WebDriver::Wait.new(timeout: opts[:timeout])
             begin
               wait.until { !driver.find_elements(element_hash).empty? }
               driver.find_elements(element_hash)
             rescue Selenium::WebDriver::Error::TimeOutError
-              raise "Could not find any elements like #{element_sym}"
+              raise "Could not find any elements like #{element_sym} (Waited #{opts[:timeout]} seconds.)"
             end
           end 
         end      
