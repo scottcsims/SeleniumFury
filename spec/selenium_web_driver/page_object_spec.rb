@@ -10,6 +10,7 @@ end
 describe PageObject do
   after(:each) do
     Object.instance_eval { remove_const :TestPage } if Object.const_defined? :TestPage
+    load 'test_page/test_page.rb'
   end
   specify 'has Selenium::WebDriver::Elements defined with the element method' do
     launch_web_driver TEST_PAGE_URL
@@ -92,3 +93,4 @@ describe PageObject do
     end
   end
 end
+
