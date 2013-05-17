@@ -1,0 +1,154 @@
+require 'spec_helper'
+
+describe PageObject do
+
+  let(:test_page) { TestPage.new(driver) }
+
+  before(:each) do
+    load "test_page/test_page.rb"
+    launch_web_driver TEST_PAGE_URL
+  end
+
+  describe GenericElement do
+
+    it "should return correct object type" do
+      test_page.input_checkbox_element.should be_an CheckboxElement
+    end
+
+    it "should return correct superclass object type" do
+      test_page.input_checkbox_element.should be_an GenericElement
+    end
+
+    it "should provide location" do
+      test_page.form_element.location.should == {id: 'form'}
+    end
+
+    it "should return a web driver element" do
+      test_page.form_element.el.should be_an Selenium::WebDriver::Element
+    end
+
+    it "should find visible elements" do
+      test_page.form_element.visible?.should be_true
+    end
+
+    it "should return the value" do
+      test_page.input_button_element.value.should == 'Click me'
+    end
+
+    it "When there is more than one element with the provided locator, it should return an array of all of them" do
+      test_page.listings_element.list.should be_an Array
+      test_page.listings_element.list[0].should be_an Selenium::WebDriver::Element
+    end
+
+    describe Selenium::WebDriver::Element
+
+    it "should return the correct value of a method defined in WebDriver::Element, but not GenericElement class" do
+      test_page.input_button_element.tag_name.should == 'input'
+    end
+
+    it "should throw an WebDriver Element error when using a method not defined in either WebDriver::Element or GenericElement classes" do
+      expect { test_page.input_checkbox.clickit_good }.to raise_error(NoMethodError)
+    end
+  end
+
+  describe ElementWaitHelpers do
+
+  end
+
+
+  describe CheckboxElement do
+    it "should check a checkbox not checked" do
+      test_page.input_checkbox_element.selected?.should be_false
+      test_page.input_checkbox_element.checked(true)
+      test_page.input_checkbox_element.selected?.should be_true
+    end
+
+    it "should leave a checkbox checked when already checked" do
+      test_page.input_checkbox_element.click
+      test_page.input_checkbox_element.selected?.should be_true
+      test_page.input_checkbox_element.checked(true)
+      test_page.input_checkbox_element.selected?.should be_true
+    end
+
+    it "should uncheck a checkbox when checked" do
+      test_page.input_checkbox_element.click
+      test_page.input_checkbox_element.selected?.should be_true
+      test_page.input_checkbox_element.checked(false)
+      test_page.input_checkbox_element.selected?.should be_false
+    end
+
+    it "should leave a checkbox alone when already checked" do
+      test_page.input_checkbox_element.selected?.should be_false
+      test_page.input_checkbox_element.checked(false)
+      test_page.input_checkbox_element.selected?.should be_false
+    end
+  end
+
+
+  describe DropDownElement do
+    it "should select from a dropdown by value" do
+      test_page.select_element.select_option(:value, 'mercedes')
+      test_page.select_element.selected_option.should == 'Mercedes'
+    end
+
+    it "should select from a dropdown by text" do
+      what = 'Mercedes'
+      test_page.select_element.select_option(:text, what)
+      test_page.select_element.selected_option.should == what
+    end
+
+    it "should select from a dropdown by index" do
+      test_page.select_element.select_option(:index, 3)
+      test_page.select_element.selected_option.should == 'Audi'
+    end
+  end
+
+  describe ImageElement do
+    it "should return the alternate text for an image" do
+      test_page.input_image_element.text.should == 'input image'
+    end
+
+    it 'should return the source of an image' do
+      test_page.input_image_element.attribute('src').include?('test_page/spacer.gif')
+    end
+  end
+
+  describe LinkElement do
+    it "should return the link location" do
+      test_page.link_element.link.should == 'http://news.ycombinator.com/'
+    end
+  end
+
+  describe SelectableElementHelpers do
+    it "should properly submit a form" do
+      text = "Hey buddy"
+      test_page.input_message_element.send_keys(text)
+      test_page.input_msg_button_element.select
+      test_page.message_element.text.should == text
+    end
+
+    it "should verify option is not selected" do
+      test_page.input_checkbox_element.selected?.should be_false
+    end
+
+    it "should verify option is selected" do
+      test_page.input_checkbox_element.select
+      test_page.input_checkbox_element.selected?.should be_true
+    end
+  end
+
+  describe TextElementHelpers do
+    it "should clear and write text" do
+      text = "Hey buddy"
+      test_page.textarea_element.send_keys(text)
+      test_page.textarea_element.value.should == text
+    end
+
+    it "should write text without clearing" do
+      existing_text = "This is a textarea field.\n    "
+      new_text = "Hey buddy"
+      test_page.textarea_element.send_keys!(new_text)
+      test_page.textarea_element.value.should == existing_text+new_text
+    end
+  end
+end

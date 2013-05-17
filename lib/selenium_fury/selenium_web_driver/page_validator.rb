@@ -23,13 +23,17 @@ module SeleniumFury
         puts "class #{page_class}"
         page_object=page_class.new(driver)
         raise "Could not find web driver elements in #{page_class}" if page_class.elements.nil?
-        page_class.elements.each do |web_drive_element_name|
-          puts "\tValidating #{web_drive_element_name}"
+        page_class.elements.each do |web_driver_element_name|
+          puts "\tValidating #{web_driver_element_name}"
           begin
-            page_object.method(web_drive_element_name).call
+            if page_object.send(web_driver_element_name).is_a? Selenium::WebDriver::Element
+              page_object.method(web_driver_element_name).call
+            else
+              raise unless page_object.send(web_driver_element_name).present?
+            end
           rescue
-            puts "\t\t\tCould not find #{web_drive_element_name}"
-            missing_elements.push(web_drive_element_name)
+            puts "\t\t\tCould not find #{web_driver_element_name}"
+            missing_elements.push(web_driver_element_name)
           end
         end
         if missing_elements.length > 0
@@ -40,7 +44,6 @@ module SeleniumFury
         end
         raise "Found Missing Elements: #{missing_elements.inspect}" if missing_elements.length > 0
       end
-
     end
   end
 end

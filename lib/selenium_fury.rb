@@ -31,6 +31,9 @@ require "selenium_fury/selenium_web_driver/page_object"
 require "selenium_fury/selenium_web_driver/page_generator"
 require "selenium_fury/selenium_web_driver/page_validator"
 
+require "selenium_fury/selenium_web_driver/element_objects/element_helpers"
+require "selenium_fury/selenium_web_driver/element_objects/generic_element"
+
 include SeleniumFury::SeleniumWebDriver::PageGenerator
 include SeleniumFury::SeleniumWebDriver::PageValidator
 
