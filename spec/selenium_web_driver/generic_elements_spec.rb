@@ -9,14 +9,14 @@ describe PageObject do
     launch_web_driver TEST_PAGE_URL
   end
 
-  describe GenericElement do
+  describe SeleniumFury::SeleniumWebDriver::PageObjectComponents::GenericElement do
 
     it "should return correct object type" do
-      test_page.input_checkbox_element.should be_an CheckboxElement
+      test_page.input_checkbox_element.should be_an SeleniumFury::SeleniumWebDriver::PageObjectComponents::CheckboxElement
     end
 
     it "should return correct superclass object type" do
-      test_page.input_checkbox_element.should be_an GenericElement
+      test_page.input_checkbox_element.should be_an SeleniumFury::SeleniumWebDriver::PageObjectComponents::GenericElement
     end
 
     it "should provide location" do
@@ -51,12 +51,9 @@ describe PageObject do
     end
   end
 
-  describe ElementWaitHelpers do
 
-  end
+  describe SeleniumFury::SeleniumWebDriver::PageObjectComponents::CheckboxElement do
 
-
-  describe CheckboxElement do
     it "should check a checkbox not checked" do
       test_page.input_checkbox_element.selected?.should be_false
       test_page.input_checkbox_element.checked(true)
@@ -85,7 +82,8 @@ describe PageObject do
   end
 
 
-  describe DropDownElement do
+  describe SeleniumFury::SeleniumWebDriver::PageObjectComponents::DropDownElement do
+
     it "should select from a dropdown by value" do
       test_page.select_element.select_option(:value, 'mercedes')
       test_page.select_element.selected_option.should == 'Mercedes'
@@ -103,7 +101,9 @@ describe PageObject do
     end
   end
 
-  describe ImageElement do
+
+  describe SeleniumFury::SeleniumWebDriver::PageObjectComponents::ImageElement do
+
     it "should return the alternate text for an image" do
       test_page.input_image_element.text.should == 'input image'
     end
@@ -113,13 +113,17 @@ describe PageObject do
     end
   end
 
-  describe LinkElement do
+
+  describe SeleniumFury::SeleniumWebDriver::PageObjectComponents::LinkElement do
+
     it "should return the link location" do
       test_page.link_element.link.should == 'http://news.ycombinator.com/'
     end
   end
 
+
   describe SelectableElementHelpers do
+
     it "should properly submit a form" do
       text = "Hey buddy"
       test_page.input_message_element.send_keys(text)
@@ -137,7 +141,9 @@ describe PageObject do
     end
   end
 
+
   describe TextElementHelpers do
+
     it "should clear and write text" do
       text = "Hey buddy"
       test_page.textarea_element.send_keys(text)
