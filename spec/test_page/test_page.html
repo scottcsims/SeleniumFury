@@ -8,8 +8,11 @@
            document.getElementById('message').innerHTML = document.form.msgtext.value
         }
     </script>
+    <style>p {display:none}</style>
 </head>
 <body>
+
+<p id="not_visible">This should not be visible by default</p>
 
 <div id="message"></div>
 
@@ -43,7 +46,7 @@
     <input id="input_hidden" type="hidden"/>
     <br/>
     <label for="input_image">Image</label>
-    <input id="input_image" type="image" alt="input image"/>
+    <input id="input_image" type="image" alt="input image" src="spacer.gif"/>
     <br/>
     <label for="input_password">Password</label>
     <input id="input_password" type="password"/>
