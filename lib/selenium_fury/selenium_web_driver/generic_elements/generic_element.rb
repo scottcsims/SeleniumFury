@@ -9,9 +9,14 @@ module SeleniumFury
         def initialize(locator, driver=nil, opt={})
           @location = locator
           @driver = driver
+          @validate = opt[:validate] != false  # true if nil
         end
 
         attr_accessor :location, :driver
+
+        def validate?
+          @validate
+        end
       end
 
       class CheckboxElement < GenericElement

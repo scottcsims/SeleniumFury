@@ -19,7 +19,7 @@ module SeleniumFury
       def web_driver_validate(page_class)
         raise("Cannot find driver") if driver.nil?
         missing_elements=[]
-        validated_elements=[]
+        skipped_elements=[]
         puts "class #{page_class}"
         page_object=page_class.new(driver)
         raise "Could not find web driver elements in #{page_class}" if page_class.elements.nil?
@@ -29,7 +29,9 @@ module SeleniumFury
             if page_object.send(web_driver_element_name).is_a? Selenium::WebDriver::Element
               page_object.method(web_driver_element_name).call
             else
-              raise unless page_object.send(web_driver_element_name).present?
+              element_obj = page_object.send(web_driver_element_name)
+              raise if !element_obj.present? && element_obj.validate?
+              skipped_elements.push(web_driver_element_name) unless element_obj.validate?
             end
           rescue
             puts "\t\t\tCould not find #{web_driver_element_name}"
@@ -38,9 +40,11 @@ module SeleniumFury
         end
         if missing_elements.length > 0
           puts "Missing Elements:"
-          missing_elements.each do |element|
-            puts element
-          end
+          missing_elements.each { |element| puts "\t#{element}" }
+        end
+        if skipped_elements.length > 0
+          puts "Skipped Elements:"
+          skipped_elements.each { |element| puts "\t#{element}" }
         end
         raise "Found Missing Elements: #{missing_elements.inspect}" if missing_elements.length > 0
       end
