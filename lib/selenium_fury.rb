@@ -23,7 +23,6 @@ require "selenium-client"
 require 'nokogiri'
 
 require "selenium_fury/common/page_parser"
-require "selenium_fury/common/selenium_api_chooser"
 require "selenium_fury/selenium_web_driver/create_selenium_web_driver"
 require "selenium_fury/selenium_web_driver/element_finder"
 require "selenium_fury/selenium_web_driver/page_object_components"
@@ -36,5 +35,3 @@ require "selenium_fury/selenium_web_driver/generic_elements/generic_element"
 
 include SeleniumFury::SeleniumWebDriver::PageGenerator
 include SeleniumFury::SeleniumWebDriver::PageValidator
-
-include SeleniumFury::SeleniumApiChooser

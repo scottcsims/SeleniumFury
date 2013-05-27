@@ -48,6 +48,10 @@ module SeleniumFury
         end
         raise "Found Missing Elements: #{missing_elements.inspect}" if missing_elements.length > 0
       end
+
+      def validate(page_class, validate_tags={})
+        web_driver_validate(page_class, validate_tags)
+      end
     end
   end
 end
