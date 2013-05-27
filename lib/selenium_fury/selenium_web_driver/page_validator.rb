@@ -16,7 +16,7 @@
 module SeleniumFury
   module SeleniumWebDriver
     module PageValidator
-      def web_driver_validate(page_class)
+      def web_driver_validate(page_class, validate_tags={})
         raise("Cannot find driver") if driver.nil?
         missing_elements=[]
         skipped_elements=[]
@@ -26,17 +26,29 @@ module SeleniumFury
         page_class.elements.each do |web_driver_element_name|
           puts "\tValidating #{web_driver_element_name}"
           begin
-            if page_object.send(web_driver_element_name).is_a? Selenium::WebDriver::Element
-              page_object.method(web_driver_element_name).call
-            else
-              element_obj = page_object.send(web_driver_element_name)
-              raise if !element_obj.present? && element_obj.validate?
-              skipped_elements.push(web_driver_element_name) unless element_obj.validate?
-            end
+            element_obj = page_object.send(web_driver_element_name)
           rescue
             puts "\t\t\tCould not find #{web_driver_element_name}"
             missing_elements.push(web_driver_element_name)
           end
+          next unless element_obj.respond_to? :validate?
+          validate_element = case
+                               when validate_tags[:validate_any] && validate_tags[:validate_all]
+                                 raise "Can't use both :validate_any and :validate_all tags"
+                               when !element_obj.validate?
+                                 false # Already set to skip
+                               when validate_tags[:validate_any] && element_obj.tags
+                                 element_obj.tags.any? { |tag| validate_tags[:validate_any].include? tag }
+                               when validate_tags[:validate_all] && element_obj.tags
+                                 element_obj.tags.all? { |tag| validate_tags[:validate_all].include? tag }
+                               else
+                                 true
+                             end
+          if validate_element && !element_obj.present?
+            puts "\t\t\tCould not find #{web_driver_element_name}"
+            missing_elements.push(web_driver_element_name)
+          end
+          skipped_elements.push(web_driver_element_name) unless validate_element
         end
         if missing_elements.length > 0
           puts "Missing Elements:"

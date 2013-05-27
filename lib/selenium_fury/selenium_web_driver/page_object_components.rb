@@ -73,63 +73,63 @@ module SeleniumFury
 
         def generic_element(element_sym, locator, opt={})
           define_method(element_sym) do
-            GenericElement.new(locator, driver, opt.merge(method: element_sym))
+            GenericElement.new(locator, driver, opt)
           end
           elements << element_sym unless elements.include? element_sym
         end
 
         def text_element(element_sym, locator, opt={})
           define_method(element_sym) do
-            TextElement.new(locator, driver, opt.merge(method: element_sym))
+            TextElement.new(locator, driver, opt)
           end
           elements << element_sym unless elements.include? element_sym
         end
 
         def link_element(element_sym, locator, opt={})
           define_method(element_sym) do
-            LinkElement.new(locator, driver, opt.merge(method: element_sym))
+            LinkElement.new(locator, driver, opt)
           end
           elements << element_sym unless elements.include? element_sym
         end
 
         def text_input_element(element_sym, locator, opt={})
           define_method(element_sym) do
-            TextInputElement.new(locator, driver, opt.merge(method: element_sym))
+            TextInputElement.new(locator, driver, opt)
           end
           elements << element_sym unless elements.include? element_sym
         end
 
         def drop_down_element(element_sym, locator, opt={})
           define_method(element_sym) do
-            DropDownElement.new(locator, driver, opt.merge(method: element_sym))
+            DropDownElement.new(locator, driver, opt)
           end
           elements << element_sym unless elements.include? element_sym
         end
 
         def submit_element(element_sym, locator, opt={})
           define_method(element_sym) do
-            SubmitElement.new(locator, driver, opt.merge(method: element_sym))
+            SubmitElement.new(locator, driver, opt)
           end
           elements << element_sym unless elements.include? element_sym
         end
 
         def checkbox_element(element_sym, locator, opt={})
           define_method(element_sym) do
-            CheckboxElement.new(locator, driver, opt.merge(method: element_sym))
+            CheckboxElement.new(locator, driver, opt)
           end
           elements << element_sym unless elements.include? element_sym
         end
 
         def image_element(element_sym, locator, opt={})
           define_method(element_sym) do
-            ImageElement.new(locator, driver, opt.merge(method: element_sym))
+            ImageElement.new(locator, driver, opt)
           end
           elements << element_sym unless elements.include? element_sym
         end
 
         def radio_button_element(element_sym, locator, opt={})
           define_method(element_sym) do
-            RadioButtonElement.new(locator, driver, opt.merge(method: element_sym))
+            RadioButtonElement.new(locator, driver, opt)
           end
           elements << element_sym unless elements.include? element_sym
         end
