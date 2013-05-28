@@ -31,6 +31,12 @@ module GenericElementHelpers
 end
 
 module ElementWaitHelpers
+  def web_driver_wait(opt=10, &condition)
+    options={}
+    opt.kind_of?(Integer) ? options[:timeout] = opt : options = opt
+    Selenium::WebDriver::Wait.new(options).until { condition.call }
+  end
+
   def wait_present(timeout)
     web_driver_wait(timeout) { present? }
   end
