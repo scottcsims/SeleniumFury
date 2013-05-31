@@ -28,7 +28,7 @@ module SeleniumFury
         end
         result += "\n\nend"
         $stdout.puts result
-        return result
+        result
       end
 
 # @param page_object_attributes [Hash]
@@ -41,8 +41,7 @@ module SeleniumFury
           end
         }
         print_selenium_web_driver_page_object page_object_attributes,class_name
-        return Object.const_set(class_name, klass).new(driver)
-
+        Object.const_set(class_name, klass).new(driver)
       end
 
 # @param driver [Selenium::WebDriver::Driver]
@@ -54,6 +53,12 @@ module SeleniumFury
         page_object_attributes = SeleniumFury::SeleniumWebDriver::ElementFinder.new(nokogiri_elements).web_driver_page_object_attributes
         raise "The generator did not find page object attributes" if page_object_attributes.empty?
         print_selenium_web_driver_page_object page_object_attributes
+      end
+
+# @param driver [Selenium::WebDriver::Driver]
+# @return [String]
+      def generate(driver)
+        web_driver_generate(driver)
       end
 
 # @param driver [Selenium::WebDriver::Driver]
