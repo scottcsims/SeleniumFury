@@ -5,9 +5,13 @@ module GenericElementHelpers
   end
 
   def present?
-    list.size > 0
+    driver.manage.timeouts.implicit_wait = 0
+    present = list.size > 0
+    driver.manage.timeouts.implicit_wait = @wait
+    present
   end
 
+  # Raises error if not already present
   def visible?
     el.displayed?
   end
@@ -31,26 +35,37 @@ module GenericElementHelpers
 end
 
 module ElementWaitHelpers
-  def web_driver_wait(opt=10, &condition)
-    options={}
-    opt.kind_of?(Integer) ? options[:timeout] = opt : options = opt
-    Selenium::WebDriver::Wait.new(options).until { condition.call }
+  def wait_for(opts={}, &condition)
+    opts[:timeout] ||= @wait
+    opts[:message] ||= ''
+    Selenium::WebDriver::Wait.new(opts).until { condition.call }
   end
 
-  def wait_present(timeout)
-    web_driver_wait(timeout) { present? }
+  def wait_present(timeout=@wait)
+    wait_for(timeout: timeout) { present? }
   end
 
-  def wait_visible(timeout)
-    web_driver_wait(timeout) { visible? }
+  def wait_not_present(timeout=@wait)
+    wait_for(timeout: timeout) { !present? }
   end
 
-  def wait_not_present(timeout)
-    web_driver_wait(timeout) { !present? }
+  def wait_visible(timeout=@wait)
+    wait_present(timeout)
+    wait_visible!(timeout)
   end
 
-  def wait_not_visible(timeout)
-    web_driver_wait(timeout) { !visible? }
+  # Raises error if not present
+  def wait_visible!(timeout=@wait)
+    wait_for(timeout: timeout) { visible? }
+  end
+
+  def wait_not_visible(timeout=@wait)
+    wait_for(timeout: timeout) { !present? || !visible? }
+  end
+
+  # Raises error if not present
+  def wait_not_visible!(timeout=@wait)
+    wait_for(timeout: timeout) { !visible? }
   end
 end
 
@@ -59,7 +74,6 @@ module CheckboxElementHelpers
     select unless be_selected == selected?
   end
 end
-
 
 module DropDownHelpers
   def selected_option
@@ -89,7 +103,6 @@ module LinkElementHelpers
     attribute('href')
   end
 end
-
 
 module SelectableElementHelpers
   def select

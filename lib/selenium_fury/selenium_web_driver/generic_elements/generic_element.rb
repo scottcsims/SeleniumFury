@@ -11,6 +11,7 @@ module SeleniumFury
           @driver = driver
           @tags = opt[:tags]
           @validate = opt[:validate] != false  # true if nil
+          @wait = 10 || opt[:wait]
         end
 
         attr_accessor :location, :driver, :tags
