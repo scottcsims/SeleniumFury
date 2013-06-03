@@ -55,6 +55,10 @@ module SeleniumFury
       class TextInputElement < GenericElement
         include TextElementHelpers
       end
+
+      class SelectableElement < GenericElement
+        include SelectableElementHelpers
+      end
     end
   end
 end

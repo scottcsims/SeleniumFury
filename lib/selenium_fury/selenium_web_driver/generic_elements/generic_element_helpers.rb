@@ -24,6 +24,10 @@ module GenericElementHelpers
     el.attribute('value')
   end
 
+  def move_to
+    @driver.action.move_to(el).perform
+  end
+
   # Use any methods from WebDriverElement not present
   def method_missing method_sym, *args
     if el.respond_to?(method_sym)
@@ -105,14 +109,35 @@ module LinkElementHelpers
 end
 
 module SelectableElementHelpers
-  def select
-    raise "Locator at #{location} can not be interacted with" unless visible?
-    el.click
-  end
 
   def selected?
     el.selected?
   end
+
+    # Raises error if not selectable
+  def select!
+    raise "Locator at #{location} is not visible" unless visible?
+    begin
+      el.click
+    rescue
+      raise "Locator at #{location} can not be interacted with" unless visible?
+    end
+    check_errors
+  end
+
+  def select
+    wait_visible
+    begin
+      el.click
+    rescue
+      retry_select
+    end
+    check_errors
+  end
+
+  # Overwrite in your project if desired
+  def check_errors; end
+  def retry_select; end
 end
 
 module TextElementHelpers
