@@ -137,7 +137,9 @@ module SelectableElementHelpers
 
   # Overwrite in your project if desired
   def check_errors; end
-  def retry_select; end
+  def retry_select
+    raise "Locator at #{location} can not be interacted with"
+  end
 end
 
 module TextElementHelpers

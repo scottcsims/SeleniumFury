@@ -133,6 +133,13 @@ module SeleniumFury
           end
           elements << element_sym unless elements.include? element_sym
         end
+
+        def selectable_element(element_sym, locator, opt={})
+          define_method(element_sym) do
+            SelectableElement.new(locator, driver, opt)
+          end
+          elements << element_sym unless elements.include? element_sym
+        end
       end
     end
   end
