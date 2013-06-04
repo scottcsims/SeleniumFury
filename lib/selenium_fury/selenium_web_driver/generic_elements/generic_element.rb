@@ -5,6 +5,7 @@ module SeleniumFury
       class GenericElement
         include GenericElementHelpers
         include ElementWaitHelpers
+        include DynamicLocators
 
         def initialize(locator, driver=nil, opt={})
           @location = locator
@@ -21,12 +22,6 @@ module SeleniumFury
           @validate
         end
 
-        def fuzzy(string='')
-          locator_key=@location.keys.first
-          new_value = @location[locator_key].gsub('FUZZY',string)
-          @location = {locator_key => new_value}
-          self
-        end
       end
 
       class CheckboxElement < GenericElement
