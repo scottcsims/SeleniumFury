@@ -34,6 +34,8 @@ class TestPage < PageObject
   image_element         :input_image_element, {id: 'input_image'}
 
   link_element          :link_element, {id: 'link111111'}
+  link_element          :fuzzy_locator_css, {css: "a[id='linkFUZZY']"}
+  link_element          :fuzzy_locator_id, {id: 'linkFUZZY'}
 
   radio_button_element  :input_radio_element, {id: 'input_radio'}
 

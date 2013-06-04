@@ -20,6 +20,13 @@ module SeleniumFury
         def validate?
           @validate
         end
+
+        def fuzzy(string='')
+          locator_key=@location.keys.first
+          new_value = @location[locator_key].gsub('FUZZY',string)
+          @location = {locator_key => new_value}
+          self
+        end
       end
 
       class CheckboxElement < GenericElement

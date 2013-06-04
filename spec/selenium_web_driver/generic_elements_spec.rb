@@ -9,6 +9,21 @@ describe PageObject do
     launch_web_driver TEST_PAGE_URL
   end
 
+  describe "Fuzzy Method" do
+
+    it "should allow dynamic selection of an element with id" do
+      specific_element = test_page.fuzzy_locator_id.fuzzy('222222')
+      specific_element.location.should == {:id=>'link222222'}
+      specific_element.link.should == 'http://yahoo.com/'
+    end
+
+    it "should allow dynamic selection of an element with css" do
+      specific_element = test_page.fuzzy_locator_css.fuzzy('333333')
+      specific_element.location.should == {:css=>"a[id='link333333']"}
+      specific_element.link.should == 'http://google.com/'
+    end
+  end
+
   describe SeleniumFury::SeleniumWebDriver::PageObjectComponents::GenericElement do
 
     it "should return correct object type" do
