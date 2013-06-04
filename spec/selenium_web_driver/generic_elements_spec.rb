@@ -11,18 +11,17 @@ describe PageObject do
 
   describe 'Dynamic Locators' do
 
-    it 'should allow dynamic selection of an element with id' do
-      specific_element = test_page.dynamic_locator_id.dynamic_locators(id: 222222)
+    it 'should allow a single dynamic selection of an element with id' do
+      specific_element = test_page.dynamic_locator_id.update_locator(id: 222222)
       specific_element.location.should == {id: 'link222222'}
       specific_element.link.should == 'http://yahoo.com/'
     end
 
-    it 'should allow dynamic selection of an element with css' do
-      specific_element = test_page.dynamic_locator_css.dynamic_locators(locator: 'id', id: 333333)
+    it 'should allow multiple dynamic selections of an element with css' do
+      specific_element = test_page.dynamic_locator_css.update_locator(locator: 'id', id: 333333)
       specific_element.location.should == {css: "a[id='link333333']"}
       specific_element.link.should == 'http://google.com/'
     end
-
   end
 
   describe SeleniumFury::SeleniumWebDriver::PageObjectComponents::GenericElement do
@@ -183,7 +182,7 @@ describe PageObject do
     end
 
     it 'should write text without clearing' do
-      existing_text = 'This is a textarea field.\n    '
+      existing_text = "This is a textarea field.\n    "
       new_text = 'Hey buddy'
       test_page.textarea_element.send_keys!(new_text)
       test_page.textarea_element.value.should == existing_text+new_text

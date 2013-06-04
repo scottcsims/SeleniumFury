@@ -5,13 +5,13 @@ module SeleniumFury
       class GenericElement
         include GenericElementHelpers
         include ElementWaitHelpers
-        include DynamicLocators
 
         def initialize(locator, driver=nil, opt={})
           @location = locator
           @driver = driver
           @tags = opt[:tags]
-          @validate = opt[:validate] != false  # true if nil
+          # Should validate if opt[:validate] is nil, should not validate if doing dynamic matchin
+          @validate = opt[:validate] != false  && !locator.values.first.match(/\^([^=].*?)\$/)
           @wait = 10 || opt[:wait]
         end
 
@@ -20,6 +20,16 @@ module SeleniumFury
 
         def validate?
           @validate
+        end
+
+        def update_locator(variables)
+          locator_value = @location.values.first
+          variables.each { |key, value|
+            locator_value.scan(/\^([^=]\w*)\$/).flatten.each { |match|
+              locator_value.gsub!("^#{match}$", value.to_s) if match == key.to_s
+            }
+          }
+          self
         end
 
       end

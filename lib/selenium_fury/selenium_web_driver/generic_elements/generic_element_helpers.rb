@@ -154,15 +154,3 @@ module TextElementHelpers
     el.send_keys(text)
   end
 end
-
-module DynamicLocators
-
-  def dynamic_locators(variables)
-    locator_value = @location.first[1]
-    variables.each { |key, value| locator_value.gsub! (':' + key.to_s + ':'), value.to_s }
-    @location.first[1] = locator_value
-    self
-  end
-
-
-end
