@@ -25,11 +25,10 @@ module SeleniumFury
 
       # @param url [string]
       # @return [Selenium::WebDriver::Driver]
-      def launch_web_driver url
+      def launch_web_driver url=nil
         @driver = Selenium::WebDriver.for :chrome
-        @driver.navigate.to url
+        @driver.navigate.to url unless url.nil?
       end
-
     end
   end
 end

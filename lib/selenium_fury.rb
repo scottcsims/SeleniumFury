@@ -18,6 +18,8 @@ require "selenium_fury/version"
 require 'rubygems'
 require 'bundler'
 
+require "selenium/webdriver/common/timeouts"
+
 require "selenium-webdriver"
 require "selenium-client"
 require 'nokogiri'
