@@ -6,9 +6,10 @@ module GenericElementHelpers
 
   def present?
     # Set implicit wait to zero so it doesn't wait that time each method call
+    implicit_wait = driver.manage.timeouts.implicit_wait
     driver.manage.timeouts.implicit_wait = 0
     present = list.size > 0
-    driver.manage.timeouts.implicit_wait = @implicit_wait
+    driver.manage.timeouts.implicit_wait = implicit_wait
     present
   end
 
@@ -95,17 +96,17 @@ end
 
 module ImageElementHelpers
   def text
-    attribute('alt')
+    el.attribute('alt')
   end
 
   def source
-    attribute('src')
+    el.attribute('src')
   end
 end
 
 module LinkElementHelpers
   def link
-    attribute('href')
+    el.attribute('href')
   end
 end
 
