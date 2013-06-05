@@ -10,15 +10,29 @@ module SeleniumFury
           @location = locator
           @driver = driver
           @tags = opt[:tags]
-          @validate = opt[:validate] != false  # true if nil
+          # Should validate if opt[:validate] is nil, should not validate if doing dynamic matchin
+          @validate = opt[:validate] != false  && !locator.values.first.match(/\^([^=].*?)\$/)
+          # This is different from implicit_wait. This explicitly waits for this element, not for entire driver session.
+          @wait = 10 || opt[:wait]
         end
 
-        attr_accessor :location, :driver, :tags
+        attr_accessor :location, :driver, :tags, :wait, :implicit_wait
         attr_writer :validate
 
         def validate?
           @validate
         end
+
+        def update_locator(variables)
+          locator_value = @location.values.first
+          variables.each { |key, value|
+            locator_value.scan(/\^([^=]\w*)\$/).flatten.each { |match|
+              locator_value.gsub!("^#{match}$", value.to_s) if match == key.to_s
+            }
+          }
+          self
+        end
+
       end
 
       class CheckboxElement < GenericElement
@@ -53,6 +67,10 @@ module SeleniumFury
 
       class TextInputElement < GenericElement
         include TextElementHelpers
+      end
+
+      class SelectableElement < GenericElement
+        include SelectableElementHelpers
       end
     end
   end

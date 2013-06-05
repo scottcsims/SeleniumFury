@@ -5,9 +5,15 @@ module GenericElementHelpers
   end
 
   def present?
-    list.size > 0
+    # Set implicit wait to zero so it doesn't wait that time each method call
+    implicit_wait = driver.manage.timeouts.implicit_wait
+    driver.manage.timeouts.implicit_wait = 0
+    present = list.size > 0
+    driver.manage.timeouts.implicit_wait = implicit_wait
+    present
   end
 
+  # Raises error if not already present
   def visible?
     el.displayed?
   end
@@ -18,6 +24,10 @@ module GenericElementHelpers
 
   def value
     el.attribute('value')
+  end
+
+  def move_to
+    @driver.action.move_to(el).perform
   end
 
   # Use any methods from WebDriverElement not present
@@ -31,26 +41,37 @@ module GenericElementHelpers
 end
 
 module ElementWaitHelpers
-  def web_driver_wait(opt=10, &condition)
-    options={}
-    opt.kind_of?(Integer) ? options[:timeout] = opt : options = opt
-    Selenium::WebDriver::Wait.new(options).until { condition.call }
+  def wait_for(opts={}, &condition)
+    opts[:timeout] ||= @wait
+    opts[:message] ||= ''
+    Selenium::WebDriver::Wait.new(opts).until { condition.call }
   end
 
-  def wait_present(timeout)
-    web_driver_wait(timeout) { present? }
+  def wait_present(timeout=@wait)
+    wait_for(timeout: timeout) { present? }
   end
 
-  def wait_visible(timeout)
-    web_driver_wait(timeout) { visible? }
+  def wait_not_present(timeout=@wait)
+    wait_for(timeout: timeout) { !present? }
   end
 
-  def wait_not_present(timeout)
-    web_driver_wait(timeout) { !present? }
+  def wait_visible(timeout=@wait)
+    wait_present(timeout)
+    wait_visible!(timeout)
   end
 
-  def wait_not_visible(timeout)
-    web_driver_wait(timeout) { !visible? }
+  # Raises error if not present
+  def wait_visible!(timeout=@wait)
+    wait_for(timeout: timeout) { visible? }
+  end
+
+  def wait_not_visible(timeout=@wait)
+    wait_for(timeout: timeout) { !present? || !visible? }
+  end
+
+  # Raises error if not present
+  def wait_not_visible!(timeout=@wait)
+    wait_for(timeout: timeout) { !visible? }
   end
 end
 
@@ -59,7 +80,6 @@ module CheckboxElementHelpers
     select unless be_selected == selected?
   end
 end
-
 
 module DropDownHelpers
   def selected_option
@@ -76,29 +96,51 @@ end
 
 module ImageElementHelpers
   def text
-    attribute('alt')
+    el.attribute('alt')
   end
 
   def source
-    attribute('src')
+    el.attribute('src')
   end
 end
 
 module LinkElementHelpers
   def link
-    attribute('href')
+    el.attribute('href')
   end
 end
 
-
 module SelectableElementHelpers
-  def select
-    raise "Locator at #{location} can not be interacted with" unless visible?
-    el.click
-  end
 
   def selected?
     el.selected?
+  end
+
+    # Raises error if not selectable
+  def select!
+    raise "Locator at #{location} is not visible" unless visible?
+    begin
+      el.click
+    rescue
+      raise "Locator at #{location} can not be interacted with" unless visible?
+    end
+    check_errors
+  end
+
+  def select
+    wait_visible
+    begin
+      el.click
+    rescue Exception => e
+      retry_select(e)
+    end
+    check_errors
+  end
+
+  # Overwrite in your project if desired
+  def check_errors; end
+  def retry_select(exception)
+    raise "Locator at #{location} can not be interacted with - Failed with #{exception}"
   end
 end
 
