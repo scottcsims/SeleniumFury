@@ -12,10 +12,17 @@ module SeleniumFury
           @tags = opt[:tags]
           # Should validate if opt[:validate] is nil, should not validate if doing dynamic matchin
           @validate = opt[:validate] != false  && !locator.values.first.match(/\^([^=].*?)\$/)
+          # Since SeFury doesn't initiate a session,
+          #   and there is no way to ask the driver what the implicit wait is set to,
+          #   if an implicit wait is desired, it will need to get passed in somehow.
+          # Figure out a better way than requiring it on every definition or initialization
+          # This should be the same for entire driver session, not updated with every element
+          @implicit_wait = 0 || opt[:implicit_wait]
+          # This is element specific, implicit_wait should be for entire driver session
           @wait = 10 || opt[:wait]
         end
 
-        attr_accessor :location, :driver, :tags
+        attr_accessor :location, :driver, :tags, :wait, :implicit_wait
         attr_writer :validate
 
         def validate?

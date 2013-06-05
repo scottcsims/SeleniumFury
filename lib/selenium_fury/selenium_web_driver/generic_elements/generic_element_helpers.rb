@@ -5,9 +5,10 @@ module GenericElementHelpers
   end
 
   def present?
+    # Set implicit wait to zero so it doesn't wait that time each method call
     driver.manage.timeouts.implicit_wait = 0
     present = list.size > 0
-    driver.manage.timeouts.implicit_wait = @wait
+    driver.manage.timeouts.implicit_wait = @implicit_wait
     present
   end
 
@@ -129,16 +130,16 @@ module SelectableElementHelpers
     wait_visible
     begin
       el.click
-    rescue
-      retry_select
+    rescue Exception => e
+      retry_select(e)
     end
     check_errors
   end
 
   # Overwrite in your project if desired
   def check_errors; end
-  def retry_select
-    raise "Locator at #{location} can not be interacted with"
+  def retry_select(exception)
+    raise "Locator at #{location} can not be interacted with - Failed with #{exception}"
   end
 end
 

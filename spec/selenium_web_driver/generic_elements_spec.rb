@@ -213,10 +213,13 @@ describe PageObject do
       end
 
       it 'should ignore implicit wait for new element check, and reset wait after done' do
-        driver.manage.timeouts.implicit_wait = 2
+        implicit_wait = 2
+        driver.manage.timeouts.implicit_wait = implicit_wait
+        test_element = test_page.not_a_element
+        test_element.implicit_wait = implicit_wait
 
         start_time = Time.now
-        test_page.not_a_element.present?
+        test_element.present?
         (Time.now-start_time).should < 1
 
         start_time = Time.now
