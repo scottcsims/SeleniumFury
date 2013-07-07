@@ -34,8 +34,8 @@ class TestPage < PageObject
   image_element         :input_image_element, {id: 'input_image'}
 
   link_element          :link_element, {id: 'link111111'}
-  link_element          :dynamic_locator_css, {css: "a[^locator$='link^id$']"}
-  link_element          :dynamic_locator_id, {id: 'link^id$'}
+  link_element          :dynamic_locator_css, {css: "a[__LOCATOR__='link__ID__']"}
+  link_element          :dynamic_locator_id, {id: 'link__ID__'}
 
   radio_button_element  :input_radio_element, {id: 'input_radio'}
 
