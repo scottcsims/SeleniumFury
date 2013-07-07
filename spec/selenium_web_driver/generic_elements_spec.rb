@@ -22,6 +22,15 @@ describe PageObject do
       specific_element.location.should == {css: "a[id='link333333']"}
       specific_element.link.should == 'http://google.com/'
     end
+
+    it 'should allow changing the selector to allow for different selections with the same element' do
+      specific_element = test_page.dynamic_locator_css.update_locator(locator: 'id', id: 333333)
+      specific_element.location.should == {css: "a[id='link333333']"}
+      specific_element.link.should == 'http://google.com/'
+      specific_element = test_page.dynamic_locator_css.update_locator(locator: 'id', id: 222222)
+      specific_element.location.should == {css: "a[id='link222222']"}
+      specific_element.link.should == 'http://yahoo.com/'
+    end
   end
 
   describe SeleniumFury::SeleniumWebDriver::PageObjectComponents::GenericElement do
