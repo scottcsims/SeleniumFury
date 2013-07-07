@@ -7,11 +7,12 @@ module SeleniumFury
         include ElementWaitHelpers
 
         def initialize(locator, driver=nil, opt={})
-          @location = locator
+          @original_location = locator.freeze
+          @location = Marshal.load(Marshal.dump(@original_location))
           @driver = driver
           @tags = opt[:tags]
           # Should validate if opt[:validate] is nil, should not validate if doing dynamic matchin
-          @validate = opt[:validate] != false  && !locator.values.first.match(/\^([^=].*?)\$/)
+          @validate = opt[:validate] != false  && !locator.values.first.match(/__/)
           # This is different from implicit_wait. This explicitly waits for this element, not for entire driver session.
           @wait = 10 || opt[:wait]
         end
@@ -24,12 +25,9 @@ module SeleniumFury
         end
 
         def update_locator(variables)
-          locator_value = @location.values.first
-          variables.each { |key, value|
-            locator_value.scan(/\^([^=]\w*)\$/).flatten.each { |match|
-              locator_value.gsub!("^#{match}$", value.to_s) if match == key.to_s
-            }
-          }
+          locator = Marshal.load(Marshal.dump(@original_location))
+          variables.each { |key, value| locator.first[1].gsub! ('__' + key.to_s.upcase + '__'), value.to_s }
+          @location = locator
           self
         end
 
