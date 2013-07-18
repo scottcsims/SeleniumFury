@@ -59,9 +59,19 @@ describe PageObject do
       test_page.input_button_element.value.should == 'Click me'
     end
 
-    it 'When there is more than one element with the provided locator, it should return an array of all of them' do
+    it 'When there is more than one element with the provided locator, it should return an array of WebDriver Elements' do
       test_page.listings_element.list.should be_an Array
       test_page.listings_element.list[0].should be_an Selenium::WebDriver::Element
+    end
+
+    it 'When there is more than one element with the provided locator, it should return an array of GenericElements' do
+      test_page.listings_element.list_elements.should be_an Array
+      test_page.listings_element.list_elements[0].should be_a SeleniumFury::SeleniumWebDriver::PageObjectComponents::GenericElement
+    end
+
+    it 'List element should provide correct information' do
+      test_page.listings_element.list_elements[0].location.should == {css: 'li.listing:nth-of-type(1)'}
+      test_page.listings_element.list_elements[0].text.should == 'Herpa'
     end
 
     describe Selenium::WebDriver::Element
@@ -171,13 +181,13 @@ describe PageObject do
     end
 
     it 'should throw not visible error if element to select is not visible and ! is specified' do
-      expect {wait_element.not_visible.select!}.
-      to raise_exception(RuntimeError, "Locator at #{wait_element.not_visible.location.to_s} is not visible")
+      expect { wait_element.not_visible.select! }.
+          to raise_exception(RuntimeError, "Locator at #{wait_element.not_visible.location.to_s} is not visible")
     end
 
     it 'should throw timeout error if element to select is not visible and ! is not specified' do
-      expect {wait_element.not_visible.select}.
-      to raise_exception(Selenium::WebDriver::Error::TimeOutError)
+      expect { wait_element.not_visible.select }.
+          to raise_exception(Selenium::WebDriver::Error::TimeOutError)
     end
   end
 
