@@ -26,6 +26,7 @@ class TestPage < PageObject
   generic_element       :fieldset_element, {css: 'fieldset'}
   generic_element       :listings_element, {css: 'li.listing'}
   generic_element       :not_visible_element, {id: 'not_visible'}
+  generic_element       :input_doubleclick, {:id => 'input_requires_double_click'}
 
   checkbox_element      :input_checkbox_element, {id: 'input_checkbox'}
 
