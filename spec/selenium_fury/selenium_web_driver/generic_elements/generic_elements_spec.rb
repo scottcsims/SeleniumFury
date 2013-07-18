@@ -59,6 +59,26 @@ describe PageObject do
       test_page.input_button_element.value.should == 'Click me'
     end
 
+    describe '#double_click' do
+      it 'should double-click the given element' do
+        status_before = test_page.input_doubleclick['readonly']
+        test_page.input_doubleclick.double_click
+        status_after = test_page.input_doubleclick['readonly']
+
+        status_after.should_not == status_before
+      end
+    end
+
+    describe '#double_click!' do
+      it 'should simply invoke click twice, ignoring any errors encountered on the initial click' do
+        status_before = test_page.input_doubleclick['readonly']
+        test_page.input_doubleclick.double_click!
+        status_after = test_page.input_doubleclick['readonly']
+
+        status_after.should == status_before # Because two #click()'s does not equal one #dblclick()
+      end
+    end
+
     it 'When there is more than one element with the provided locator, it should return an array of all of them' do
       test_page.listings_element.list.should be_an Array
       test_page.listings_element.list[0].should be_an Selenium::WebDriver::Element

@@ -30,6 +30,18 @@ module GenericElementHelpers
     @driver.action.move_to(el).perform
   end
 
+  def double_click
+    @driver.action.double_click(el).perform
+  end
+
+  def double_click!
+    el.click
+  rescue Exception => e
+    puts "Encountered #{e.class} trying to click element at #{self.location}"
+  ensure
+    el.click
+  end
+
   # Use any methods from WebDriverElement not present
   def method_missing method_sym, *args
     if el.respond_to?(method_sym)
