@@ -5,16 +5,20 @@ module GenericElementHelpers
   end
 
   def list
-    (1..list.size).map { |i| self.class.new({css: location[:css]+":nth-of-type(#{i})"}, @driver) }
+    (1..number_matching).map { |i| self.class.new({css: location[:css]+":nth-of-type(#{i})"}, @driver) }
   end
 
   def present?
     # Set implicit wait to zero so it doesn't wait that time each method call
     implicit_wait = driver.manage.timeouts.implicit_wait
     driver.manage.timeouts.implicit_wait = 0
-    present = @driver.find_elements(location).size > 0
+    present = number_matching > 0
     driver.manage.timeouts.implicit_wait = implicit_wait
     present
+  end
+
+  def number_matching
+    @driver.find_elements(location).size
   end
 
   # Raises error if not already present
