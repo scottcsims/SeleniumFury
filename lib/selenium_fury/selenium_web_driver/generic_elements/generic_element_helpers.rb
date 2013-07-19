@@ -4,11 +4,15 @@ module GenericElementHelpers
     @driver.find_element(location)
   end
 
+  def list
+    (1..list.size).map { |i| self.class.new({css: location[:css]+":nth-of-type(#{i})"}, @driver) }
+  end
+
   def present?
     # Set implicit wait to zero so it doesn't wait that time each method call
     implicit_wait = driver.manage.timeouts.implicit_wait
     driver.manage.timeouts.implicit_wait = 0
-    present = list.size > 0
+    present = @driver.find_elements(location).size > 0
     driver.manage.timeouts.implicit_wait = implicit_wait
     present
   end
@@ -16,10 +20,6 @@ module GenericElementHelpers
   # Raises error if not already present
   def visible?
     el.displayed?
-  end
-
-  def list
-    @driver.find_elements(location)
   end
 
   def value
@@ -98,7 +98,7 @@ module DropDownHelpers
     Selenium::WebDriver::Support::Select.new(el).first_selected_option.text
   end
 
-    # how can be :text, :index, :value
+  # how can be :text, :index, :value
   def select_option(how=nil, what=nil)
     raise "Locator at #{location} can not be interacted with" unless visible?
     el.click if how.nil?
@@ -128,7 +128,7 @@ module SelectableElementHelpers
     el.selected?
   end
 
-    # Raises error if not selectable
+  # Raises error if not selectable
   def select!
     raise "Locator at #{location} is not visible" unless visible?
     begin
@@ -150,7 +150,9 @@ module SelectableElementHelpers
   end
 
   # Overwrite in your project if desired
-  def check_errors; end
+  def check_errors;
+  end
+
   def retry_select(exception)
     raise "Locator at #{location} can not be interacted with - Failed with #{exception}"
   end
