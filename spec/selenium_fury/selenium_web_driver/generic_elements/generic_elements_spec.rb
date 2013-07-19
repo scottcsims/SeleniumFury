@@ -59,19 +59,14 @@ describe PageObject do
       test_page.input_button_element.value.should == 'Click me'
     end
 
-    it 'When there is more than one element with the provided locator, it should return an array of WebDriver Elements' do
-      test_page.listings_element.list.should be_an Array
-      test_page.listings_element.list[0].should be_an Selenium::WebDriver::Element
-    end
-
     it 'When there is more than one element with the provided locator, it should return an array of GenericElements' do
-      test_page.listings_element.list_elements.should be_an Array
-      test_page.listings_element.list_elements[0].should be_a SeleniumFury::SeleniumWebDriver::PageObjectComponents::GenericElement
+      test_page.listings_element.list.should be_an Array
+      test_page.listings_element.list[0].should be_a SeleniumFury::SeleniumWebDriver::PageObjectComponents::GenericElement
     end
 
     it 'List element should provide correct information' do
-      test_page.listings_element.list_elements[0].location.should == {css: 'li.listing:nth-of-type(1)'}
-      test_page.listings_element.list_elements[0].text.should == 'Herpa'
+      test_page.listings_element.list[0].location.should == {css: 'li.listing:nth-of-type(1)'}
+      test_page.listings_element.list[0].text.should == 'Herpa'
     end
 
     describe Selenium::WebDriver::Element
