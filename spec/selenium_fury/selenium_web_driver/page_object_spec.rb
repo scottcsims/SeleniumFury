@@ -42,7 +42,7 @@ describe PageObject do
     launch_web_driver TEST_PAGE_URL
     test_page = TestPage.new(driver)
     test_page.class.elements.should_not be_nil
-    test_page.class.elements.should have(39).elements
+    test_page.class.elements.should have(40).elements
     test_page.method(test_page.class.elements[0]).call.class.should == Selenium::WebDriver::Element
   end
 
