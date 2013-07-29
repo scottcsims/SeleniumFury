@@ -37,7 +37,7 @@ describe SeleniumFury::SeleniumWebDriver::PageValidator do
 
     it "should validate everything not hard coded when no tags are passed" do
       expect { validate(SkippedElement) }.
-        to raise_exception(RuntimeError, "Found Missing Elements: [:foo_element, :bar_element, :multiple_tag, :no_tag]")
+          to raise_exception(RuntimeError, "Found Missing Elements: [:foo_element, :bar_element, :multiple_tag, :no_tag]")
     end
 
     it "should validate all elements where all tags defined in the Page Object are passed in with the test" do
@@ -62,5 +62,11 @@ describe SeleniumFury::SeleniumWebDriver::PageValidator do
       expect { validate(SkippedElement, {validate_any: [:foo], validate_all: [:bar]}) }.
           to raise_exception(RuntimeError, "Can't use both :validate_any and :validate_all tags")
     end
+
+    it "should validate with nokogiri verification type" do
+      expect { validate(SkippedElement, {validate_all: [:foo], verification_type: :nokogiri}) }.
+          to raise_exception(RuntimeError, "Found Missing Elements: [:foo_element, :no_tag]")
+    end
+
   end
 end
