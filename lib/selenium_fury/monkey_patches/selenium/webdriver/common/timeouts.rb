@@ -13,12 +13,24 @@
 # * See the License for the specific language governing permissions and
 # * limitations under the License.
 # */
+module Selenium
+  module WebDriver
+    class Timeouts
 
-require 'selenium_fury'
+      # A getter for implicit_wait
+      # @return [Integer] the value that implicit_wait is set to
+      def implicit_wait
+        @implicit_wait ||= 0
+      end
 
-require 'test_page/test_page_custom_generator_configuration'
-require 'test_page/test_page'
+      # A setter for implicit_wait
+      # @param seconds [Integer] the number of seconds we want to set implicit_wait to
+      # @return []
+      def implicit_wait=(seconds)
+        @implicit_wait = seconds
+        @bridge.setImplicitWaitTimeout Integer(@implicit_wait * 1000)
+      end
 
-TEST_PAGE_URL="file://#{File.dirname(__FILE__)}/test_page/test_page.html"
-
-include SeleniumFury::Utilities
+    end # Timeouts
+  end # WebDriver
+end # Selenium

@@ -13,24 +13,42 @@
 # * See the License for the specific language governing permissions and
 # * limitations under the License.
 # */
-require 'rubygems'
-require 'bundler'
-
 require 'selenium-webdriver'
 require 'nokogiri'
+require 'active_support/inflector/methods'
 
 require 'selenium_fury/version'
-require 'selenium/webdriver/common/timeouts'
+require 'selenium_fury/monkey_patches/selenium/webdriver/common/timeouts'
 require 'selenium_fury/common/page_parser'
-require 'selenium_fury/selenium_web_driver/create_selenium_web_driver'
-require 'selenium_fury/selenium_web_driver/element_finder'
-require 'selenium_fury/selenium_web_driver/page_object_components'
-require 'selenium_fury/selenium_web_driver/page_object'
-require 'selenium_fury/selenium_web_driver/page_generator'
-require 'selenium_fury/selenium_web_driver/page_validator'
+require 'selenium_fury/common/utilities'
 
-require 'selenium_fury/selenium_web_driver/generic_elements/generic_element_helpers'
-require 'selenium_fury/selenium_web_driver/generic_elements/generic_element'
+# PageObject ElementType ElementHelpers
+require 'selenium_fury/page_object/element_types/element_helpers/checkbox_element_helper'
+require 'selenium_fury/page_object/element_types/element_helpers/drop_down_element_helper'
+require 'selenium_fury/page_object/element_types/element_helpers/generic_element_helper'
+require 'selenium_fury/page_object/element_types/element_helpers/image_element_helper'
+require 'selenium_fury/page_object/element_types/element_helpers/link_element_helper'
+require 'selenium_fury/page_object/element_types/element_helpers/selectable_element_helper'
+require 'selenium_fury/page_object/element_types/element_helpers/text_input_element_helper'
+require 'selenium_fury/page_object/element_types/element_helpers/wait_element_helper'
 
-include SeleniumFury::SeleniumWebDriver::PageGenerator
-include SeleniumFury::SeleniumWebDriver::PageValidator
+# PageObject ElementTypes
+require 'selenium_fury/page_object/element_types/generic_element'
+require 'selenium_fury/page_object/element_types/checkbox_element'
+require 'selenium_fury/page_object/element_types/drop_down_element'
+require 'selenium_fury/page_object/element_types/image_element'
+require 'selenium_fury/page_object/element_types/link_element'
+require 'selenium_fury/page_object/element_types/radio_button_element'
+require 'selenium_fury/page_object/element_types/selectable_element'
+require 'selenium_fury/page_object/element_types/submit_element'
+require 'selenium_fury/page_object/element_types/text_element'
+require 'selenium_fury/page_object/element_types/text_input_element'
+
+# PageObject
+require 'selenium_fury/page_object/page_object'
+
+# PageObject Utilities
+require 'selenium_fury/page_object/page_object_generator'
+require 'selenium_fury/page_object/page_object_validator'
+
+include SeleniumFury::PageObject

@@ -13,14 +13,13 @@
 # * See the License for the specific language governing permissions and
 # * limitations under the License.
 # */
-
-class PageObject
-  include SeleniumFury::SeleniumWebDriver::PageObjectComponents
-  include SeleniumFury::SeleniumWebDriver::CreateSeleniumWebDriver
-
-  def initialize driver = nil
-    @driver = driver
-  end
-
-end
-
+module SeleniumFury
+  module PageObject
+    module ElementTypes
+      # This class represents a drop down element on a web page.
+      class TextInputElement < GenericElement
+        include ElementHelpers::TextInputElementHelper
+      end # TextInputElement
+    end # ElementTypes
+  end # PageObject
+end # SeleniumFury

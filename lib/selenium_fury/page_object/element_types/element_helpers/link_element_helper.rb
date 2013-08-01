@@ -13,12 +13,21 @@
 # * See the License for the specific language governing permissions and
 # * limitations under the License.
 # */
+module SeleniumFury
+  module PageObject
+    module ElementTypes
+      module ElementHelpers
+        # Defines what we can do to a link element
+        module LinkElementHelper
+          # Allows us to easily get the text the link is directed to
+          #
+          # @return [String] the location of where the link will take us if clicked.
+          def link
+            el.attribute('href')
+          end
+        end # LinkElementHelper
+      end # ElementHelpers
+    end # ElementTypes
+  end # PageObject
+end # SeleniumFury
 
-require 'selenium_fury'
-
-require 'test_page/test_page_custom_generator_configuration'
-require 'test_page/test_page'
-
-TEST_PAGE_URL="file://#{File.dirname(__FILE__)}/test_page/test_page.html"
-
-include SeleniumFury::Utilities

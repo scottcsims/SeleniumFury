@@ -14,36 +14,36 @@
 # * limitations under the License.
 # */
 module SeleniumFury
-    class PageParser
-      def initialize (html_source)
-        @html_source = html_source
-        @nokogiri_selectors= ["select",
-                              "textarea",
-                              "form",
-                              "input",
-                              "input[type='button']",
-                              "input[type='file']",
-                              "input[type='checkbox']",
-                              "input[type='password']",
-                              "input[type='radio']",
-                              "input[type='reset']",
-                              "input[type='image']",
-                              "input[type='submit']",
-                              "input[type='text']"]
+  class PageParser
+    def initialize (html_source)
+      @html_source = html_source
+      @nokogiri_selectors= ["select",
+                            "textarea",
+                            "form",
+                            "input",
+                            "input[type='button']",
+                            "input[type='file']",
+                            "input[type='checkbox']",
+                            "input[type='password']",
+                            "input[type='radio']",
+                            "input[type='reset']",
+                            "input[type='image']",
+                            "input[type='submit']",
+                            "input[type='text']"]
 
-      end
-
-      attr_reader :browser, :nokogiri_selectors,:html_source
-
-      def nokogiri_elements
-        nokogiri_elements=[]
-        doc = Nokogiri::HTML(html_source)
-        nokogiri_selectors.each do |selector|
-          doc.css(selector).each do |nokogiri_element|
-            nokogiri_elements.push(nokogiri_element)
-          end
-        end
-        return nokogiri_elements
-      end
     end
-end
+
+    attr_reader :browser, :nokogiri_selectors, :html_source
+
+    def nokogiri_elements
+      nokogiri_elements=[]
+      doc = Nokogiri::HTML(html_source)
+      nokogiri_selectors.each do |selector|
+        doc.css(selector).each do |nokogiri_element|
+          nokogiri_elements.push(nokogiri_element)
+        end
+      end
+      return nokogiri_elements
+    end
+  end # PageParser
+end # SeleniumFury

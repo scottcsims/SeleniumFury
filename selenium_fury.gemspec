@@ -13,8 +13,9 @@ Gem::Specification.new do |gem|
   gem.name          = "selenium_fury"
   gem.require_paths = ["lib"]
   gem.version       = SeleniumFury::VERSION
-  gem.add_dependency('selenium-webdriver','~> 2')
-  gem.add_dependency('nokogiri','~> 1')
+  gem.add_dependency('selenium-webdriver','~> 2.0')
+  gem.add_dependency('nokogiri','~> 1.0')
+  gem.add_dependency('activesupport','~> 4.0')
   gem.add_development_dependency('rspec','~>2.12')
   gem.add_development_dependency('cucumber')
   gem.add_development_dependency('redcarpet')
