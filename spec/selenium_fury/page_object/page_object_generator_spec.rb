@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PageObjectGenerator do
-  before(:all) { launch_web_driver TEST_PAGE_URL }
+  before(:all) { start_web_driver TEST_PAGE_URL }
   after(:all) { stop_web_driver }
 
   it "should find elements on the Test page" do

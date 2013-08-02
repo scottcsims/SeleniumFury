@@ -15,21 +15,32 @@
 # */
 module SeleniumFury
   module Utilities
+
+    # Initialize our global to be a hash.
+    $driver = {}
+
     #@return [Selenium::WebDriver::Driver]
-    def driver
-      return $driver
+    def driver(tag=:standard)
+      $driver[tag]
+    end
+
+    def drivers
+      $driver
     end
 
     # @param url [string]
     # @return [Selenium::WebDriver::Driver]
-    def launch_web_driver url=nil
-      $driver = Selenium::WebDriver.for :chrome
-      $driver.navigate.to url unless url.nil?
+    def start_web_driver url=nil, tag=:standard
+      raise 'Cannot open a second browser with the same key.' if $driver.has_key?(tag)
+      $driver[tag] = Selenium::WebDriver.for :chrome
+      $driver[tag].navigate.to url unless url.nil?
+      $driver[tag]
     end
 
-    def stop_web_driver
+    def stop_web_driver(tag=:standard)
       begin
-        $driver.quit unless driver.nil?
+        driver(tag).quit unless driver(tag).nil?
+        $driver.delete(tag)
       rescue => e
         if /(CLIENT_STOPPED_SESSION|Errno::ECONNREFUSED)/ === e.inspect
           puts "Ignoring #{e.class} because it was thrown by Driver#quit being called on an already-closed driver"
@@ -38,5 +49,10 @@ module SeleniumFury
         end
       end
     end
+
+    def stop_all_web_drivers
+      $driver.keys.each { |tag| stop_web_driver(tag) }
+    end
+
   end # Utilities
 end # SeleniumFury

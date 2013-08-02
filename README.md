@@ -22,7 +22,7 @@ include SeleniumFury::SeleniumWebDriver::CreateSeleniumWebDriver
 Quick Test Demo
 =========
 ```ruby
-launch_web_driver("http://www.homeaway.com/")
+start_web_driver("http://www.homeaway.com/")
 home_page=get_page_object(driver,'HomePage')
 home_page.search_keywords.send_keys 'Destin'
 home_page.keyword_submit.click
@@ -32,14 +32,14 @@ driver.quit
 Generate Demo
 =========
 ```ruby
-launch_web_driver("http://www.homeaway.com/")
+start_web_driver("http://www.homeaway.com/")
 generate(driver)
 driver.quit
 ```
 Validate Demo
 =========
 ```ruby
-launch_web_driver("http://www.homeaway.com/")
+start_web_driver("http://www.homeaway.com/")
 get_page_object(driver,'HomePage')
 validate(HomePage)
 driver.quit

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ElementTypes::CheckboxElement do
 
   let(:test_page) { TestPage.new(driver) }
-  before(:all) { launch_web_driver TEST_PAGE_URL }
+  before(:all) { start_web_driver TEST_PAGE_URL }
   after(:all) { stop_web_driver }
 
   it 'should check a checkbox not checked' do

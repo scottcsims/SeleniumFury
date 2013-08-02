@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe PageObject do
   let(:test_page) { TestPage.new(driver) }
-  before(:all) { launch_web_driver TEST_PAGE_URL }
+  before(:all) { start_web_driver TEST_PAGE_URL }
   after(:all) { stop_web_driver }
   after(:each) do
     Object.instance_eval { remove_const :TestPage } if Object.const_defined? :TestPage
