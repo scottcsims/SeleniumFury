@@ -74,7 +74,7 @@ module SeleniumFury
           end
         end
 
-        element_types = Dir.entries('lib/selenium_fury/page_object/element_types').select {|f| f.match(/_element.rb$/) }
+        element_types = Dir.entries(File.expand_path('../element_types', __FILE__)).select {|f| f.match(/_element.rb$/) }
         element_types.each do |file|
           method_name = file[0..-4]
           define_method(method_name) do |element_sym, locator, opt={} |
