@@ -3,14 +3,8 @@ require 'spec_helper'
 describe ElementTypes::DropDownElement do
 
   let(:test_page) { TestPage.new(driver) }
-
-  before(:all) do
-    launch_web_driver TEST_PAGE_URL
-  end
-
-  after(:all) do
-    stop_web_driver
-  end
+  before(:all) { launch_web_driver TEST_PAGE_URL }
+  after(:all) { stop_web_driver }
 
   it 'should select from a dropdown by value' do
     test_page.select_element.select_option(:value, 'mercedes')

@@ -52,3 +52,4 @@ require 'selenium_fury/page_object/page_object_generator'
 require 'selenium_fury/page_object/page_object_validator'
 
 include SeleniumFury::PageObject
+include SeleniumFury::Utilities

@@ -1,16 +1,11 @@
 require 'spec_helper'
-describe SeleniumFury::PageObject::PageObjectValidator do
 
-  before(:all) do
-    launch_web_driver TEST_PAGE_URL
-  end
+describe PageObjectValidator do
 
-  after(:all) do
-    stop_web_driver
-  end
+  before(:all) { launch_web_driver TEST_PAGE_URL }
+  after(:all) { stop_web_driver }
 
   context "with present elements" do
-
     it "should not raise an error when validating" do
       expect { PageObjectValidator.validate(TestPage) }.to_not raise_error
     end
@@ -41,7 +36,7 @@ describe SeleniumFury::PageObject::PageObjectValidator do
 
     it "should validate everything not hard coded when no tags are passed" do
       expect { PageObjectValidator.validate(SkippedElement) }.
-        to raise_exception(RuntimeError, 'Found Missing Elements: [:foo_element, :bar_element, :multiple_tag, :no_tag]')
+          to raise_exception(RuntimeError, 'Found Missing Elements: [:foo_element, :bar_element, :multiple_tag, :no_tag]')
     end
 
     it "should validate all elements where all tags defined in the Page Object are passed in with the test" do
@@ -64,7 +59,7 @@ describe SeleniumFury::PageObject::PageObjectValidator do
 
     it "should not allow multiple types of tag logic" do
       expect { PageObjectValidator.validate(SkippedElement, {validate_any: [:foo], validate_all: [:bar]}) }.
-          to raise_exception(RuntimeError, "Can't use both :validate_any and :validate_all tags")
+          to raise_exception(RuntimeError, 'Cannot use both :validate_any and :validate_all tags')
     end
   end
 end

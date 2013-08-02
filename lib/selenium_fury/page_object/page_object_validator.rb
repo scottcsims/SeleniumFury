@@ -18,24 +18,24 @@ module SeleniumFury
     module PageObjectValidator
       class << self
         def web_driver_validate(page_class, validate_tags={})
-          raise("Cannot find driver") if driver.nil?
+          raise 'Cannot find driver' if driver.nil?
           missing_elements=[]
           skipped_elements=[]
           puts "class #{page_class}"
           page_object=page_class.new(driver)
           raise "Could not find web driver elements in #{page_class}" if page_class.elements.nil?
           page_class.elements.each do |web_driver_element_name|
-            puts "\tValidating #{web_driver_element_name}"
+            puts "  Validating #{web_driver_element_name}"
             begin
               element_obj = page_object.send(web_driver_element_name)
             rescue
-              puts "\t\t\tCould not find #{web_driver_element_name}"
+              puts "    Could not find #{web_driver_element_name}"
               missing_elements.push(web_driver_element_name)
             end
             next unless element_obj.respond_to? :validate?
             validate_element = case
                                  when validate_tags[:validate_any] && validate_tags[:validate_all]
-                                   raise "Can't use both :validate_any and :validate_all tags"
+                                   raise 'Cannot use both :validate_any and :validate_all tags'
                                  when !element_obj.validate?
                                    false # Already set to skip
                                  when validate_tags[:validate_any] && element_obj.tags
@@ -46,7 +46,7 @@ module SeleniumFury
                                    true
                                end
             if validate_element && !element_obj.present?
-              puts "\t\t\tCould not find #{web_driver_element_name}"
+              puts "    Could not find #{web_driver_element_name}"
               missing_elements.push(web_driver_element_name)
             end
             skipped_elements.push(web_driver_element_name) unless validate_element

@@ -1,12 +1,9 @@
 require 'spec_helper'
 
-describe SeleniumFury::PageObject::PageObjectGenerator do
-  before(:all) do
-    launch_web_driver TEST_PAGE_URL
-  end
-  after(:all) do
-    stop_web_driver
-  end
+describe PageObjectGenerator do
+  before(:all) { launch_web_driver TEST_PAGE_URL }
+  after(:all) { stop_web_driver }
+
   it "should find elements on the Test page" do
     result = PageObjectGenerator.generate(driver)
     result.should include 'found (16 elements)'

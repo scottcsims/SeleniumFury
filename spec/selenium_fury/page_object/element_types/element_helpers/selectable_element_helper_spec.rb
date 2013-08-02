@@ -1,16 +1,10 @@
 require 'spec_helper'
 
-describe SeleniumFury::PageObject::ElementTypes::ElementHelpers::SelectableElementHelper do
+describe ElementTypes::ElementHelpers::SelectableElementHelper do
   let(:wait_element) { WaitElement.new(driver) }
   let(:test_page) { TestPage.new(driver) }
-
-  before(:all) do
-    launch_web_driver TEST_PAGE_URL
-  end
-
-  after(:all) do
-    stop_web_driver
-  end
+  before(:all) { launch_web_driver TEST_PAGE_URL }
+  after(:all) { stop_web_driver }
 
   class WaitElement < PageObject
     generic_element :not_a_element, {id: 'not a element'}

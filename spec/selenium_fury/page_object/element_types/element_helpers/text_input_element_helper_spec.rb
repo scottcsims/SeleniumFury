@@ -3,14 +3,8 @@ require 'spec_helper'
 describe ElementTypes::ElementHelpers::TextInputElementHelper do
 
   let(:test_page) { TestPage.new(driver) }
-
-  before(:all) do
-    launch_web_driver TEST_PAGE_URL
-  end
-
-  after(:all) do
-    stop_web_driver
-  end
+  before(:all) { launch_web_driver TEST_PAGE_URL }
+  after(:all) { stop_web_driver }
 
   it 'should clear and write text' do
     text = 'Hey buddy'
