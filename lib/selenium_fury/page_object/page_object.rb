@@ -33,7 +33,7 @@ module SeleniumFury
         def element(element_sym, element_hash, opts={})
           #@transient_elements ||= []
           # define a new method with the name of the symbol after locator that returns the value
-          send :define_method, element_sym do
+          define_method(element_sym) do
             wait = Selenium::WebDriver::Wait.new(:timeout => 0.5) # seconds
             begin
               wait.until { @driver.find_element element_hash }
@@ -54,7 +54,7 @@ module SeleniumFury
         # @param opts [Hash]
         # @return [Selenium::WebDriver::Element]
         def element_list(element_sym, element_hash, opts={})
-          send :define_method, element_sym do
+          define_method(element_sym) do
             wait = Selenium::WebDriver::Wait.new(timeout: 0.5)
             begin
               wait.until { !@driver.find_elements(element_hash).empty? }
@@ -68,8 +68,7 @@ module SeleniumFury
 
         # @return [PageObject]
         def page(page_sym, page_class)
-          send :define_method, page_sym do
-            # note we need to check the ::PageObject Class not the SeleniumFury::PageObject Module
+          define_method(page_sym) do
             raise "#{page_class.to_s} does not inherit from PageObject" unless page_class.superclass == PageObject::PageObject
             page_class.new(@driver)
           end
