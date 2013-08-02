@@ -21,4 +21,22 @@ describe 'PageObject Integration Tests' do
     end
   end
 
+  it 'two page objects; two browsers; working ElementTypes and ElementTypeHelpers' do
+    begin
+      page1 = TestPage.new(start_web_driver(TEST_PAGE_URL, :b1))
+      page2 = TestPage.new(start_web_driver(TEST_PAGE_URL, :b2))
+
+      text1 = 'page1'
+      page1.textarea_element.send_keys(text1)
+
+      text2 = 'page2'
+      page2.textarea_element.send_keys(text2)
+
+      page1.textarea_element.value.should eql text1
+      page2.textarea_element.value.should eql text2
+    ensure
+      stop_all_web_drivers
+    end
+  end
+
 end
