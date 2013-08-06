@@ -28,7 +28,7 @@ module SeleniumFury
           # Should validate if opt[:validate] is nil, should not validate if doing dynamic matchin
           @validate = opt[:validate] != false && !locator.values.first.match(/__/)
           # This is different from implicit_wait. This explicitly waits for this element, not for entire driver session.
-          @wait = 10 || opt[:wait]
+          @wait = opt[:wait] || 10
         end
 
         attr_accessor :location, :driver, :tags, :wait, :implicit_wait
