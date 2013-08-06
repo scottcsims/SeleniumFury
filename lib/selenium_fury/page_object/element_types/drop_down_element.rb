@@ -13,6 +13,8 @@
 # * See the License for the specific language governing permissions and
 # * limitations under the License.
 # */
+require 'selenium_fury/page_object/element_types/generic_element'
+
 module SeleniumFury
   module PageObject
     module ElementTypes

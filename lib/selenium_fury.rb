@@ -19,38 +19,19 @@ require 'active_support/inflector/methods'
 
 require 'selenium_fury/version'
 require 'selenium_fury/monkey_patches/selenium/webdriver/common/timeouts'
-require 'selenium_fury/common/page_parser'
-require 'selenium_fury/common/driver_collection'
-require 'selenium_fury/common/utilities'
+
+gem_root = File.dirname(File.absolute_path(__FILE__)) + '/selenium_fury/'
+# Common
+Dir.glob(gem_root + 'common/*.rb', &method(:require))
 
 # PageObject ElementType ElementHelpers
-require 'selenium_fury/page_object/element_types/element_helpers/checkbox_element_helper'
-require 'selenium_fury/page_object/element_types/element_helpers/drop_down_element_helper'
-require 'selenium_fury/page_object/element_types/element_helpers/generic_element_helper'
-require 'selenium_fury/page_object/element_types/element_helpers/image_element_helper'
-require 'selenium_fury/page_object/element_types/element_helpers/link_element_helper'
-require 'selenium_fury/page_object/element_types/element_helpers/selectable_element_helper'
-require 'selenium_fury/page_object/element_types/element_helpers/text_input_element_helper'
-require 'selenium_fury/page_object/element_types/element_helpers/wait_element_helper'
+Dir.glob(gem_root + 'page_object/element_types/element_helpers/*.rb', &method(:require))
 
 # PageObject ElementTypes
-require 'selenium_fury/page_object/element_types/generic_element'
-require 'selenium_fury/page_object/element_types/checkbox_element'
-require 'selenium_fury/page_object/element_types/drop_down_element'
-require 'selenium_fury/page_object/element_types/image_element'
-require 'selenium_fury/page_object/element_types/link_element'
-require 'selenium_fury/page_object/element_types/radio_button_element'
-require 'selenium_fury/page_object/element_types/selectable_element'
-require 'selenium_fury/page_object/element_types/submit_element'
-require 'selenium_fury/page_object/element_types/text_element'
-require 'selenium_fury/page_object/element_types/text_input_element'
+Dir.glob(gem_root + 'page_object/element_types/*.rb', &method(:require))
 
 # PageObject
-require 'selenium_fury/page_object/page_object'
-
-# PageObject Utilities
-require 'selenium_fury/page_object/page_object_generator'
-require 'selenium_fury/page_object/page_object_validator'
+Dir.glob(gem_root + 'page_object/*.rb', &method(:require))
 
 include SeleniumFury::PageObject
 include SeleniumFury::Utilities
