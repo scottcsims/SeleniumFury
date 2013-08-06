@@ -20,6 +20,7 @@ require 'active_support/inflector/methods'
 require 'selenium_fury/version'
 require 'selenium_fury/monkey_patches/selenium/webdriver/common/timeouts'
 require 'selenium_fury/common/page_parser'
+require 'selenium_fury/common/driver_collection'
 require 'selenium_fury/common/utilities'
 
 # PageObject ElementType ElementHelpers
