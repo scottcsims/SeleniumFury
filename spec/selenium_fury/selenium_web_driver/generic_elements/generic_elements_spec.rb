@@ -80,14 +80,9 @@ describe PageObject do
       end
     end
 
-    it 'When there is more than one element with the provided locator, it should return an array of GenericElements' do
+    it 'When there is more than one element with the provided locator, it should return an array of WebDriver Elements' do
       test_page.listings_element.list.should be_an Array
-      test_page.listings_element.list[0].should be_a SeleniumFury::SeleniumWebDriver::PageObjectComponents::GenericElement
-    end
-
-    it 'List element should provide correct information' do
-      test_page.listings_element.list[0].location.should == {css: 'li.listing:nth-of-type(1)'}
-      test_page.listings_element.list[0].text.should == 'Herpa'
+      test_page.listings_element.list[0].should be_an Selenium::WebDriver::Element
     end
 
     describe Selenium::WebDriver::Element
@@ -234,7 +229,7 @@ describe PageObject do
       it 'should error immediately with traditional element check and implicit wait not set' do
         start_time = Time.now
         expect { driver.find_element(id: 'not a element') }.
-            to raise_exception(Selenium::WebDriver::Error::NoSuchElementError, 'The element could not be found')
+            to raise_exception(Selenium::WebDriver::Error::NoSuchElementError)
         (Time.now-start_time).should < 1
       end
 
@@ -243,7 +238,7 @@ describe PageObject do
 
         start_time = Time.now
         expect { driver.find_element(id: 'not a element') }.
-            to raise_exception(Selenium::WebDriver::Error::NoSuchElementError, 'The element could not be found')
+            to raise_exception(Selenium::WebDriver::Error::NoSuchElementError)
         (Time.now-start_time).should > 2
       end
 
@@ -259,7 +254,7 @@ describe PageObject do
 
         start_time = Time.now
         expect { driver.find_element(id: 'not a element') }.
-            to raise_exception(Selenium::WebDriver::Error::NoSuchElementError, 'The element could not be found')
+            to raise_exception(Selenium::WebDriver::Error::NoSuchElementError)
         (Time.now-start_time).should > 2
       end
     end
