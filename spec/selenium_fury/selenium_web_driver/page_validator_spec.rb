@@ -62,11 +62,5 @@ describe SeleniumFury::SeleniumWebDriver::PageValidator do
       expect { validate(SkippedElement, {validate_any: [:foo], validate_all: [:bar]}) }.
           to raise_exception(RuntimeError, "Can't use both :validate_any and :validate_all tags")
     end
-
-    it "should validate with nokogiri verification type" do
-      expect { validate(SkippedElement, {validate_all: [:foo], verification_type: :nokogiri}) }.
-          to raise_exception(RuntimeError, "Found Missing Elements: [:foo_element, :no_tag]")
-    end
-
   end
 end
