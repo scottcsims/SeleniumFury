@@ -37,7 +37,7 @@ describe SeleniumFury::SeleniumWebDriver::PageValidator do
 
     it "should validate everything not hard coded when no tags are passed" do
       expect { validate(SkippedElement) }.
-        to raise_exception(RuntimeError, "Found Missing Elements: [:foo_element, :bar_element, :multiple_tag, :no_tag]")
+          to raise_exception(RuntimeError, "Found Missing Elements: [:foo_element, :bar_element, :multiple_tag, :no_tag]")
     end
 
     it "should validate all elements where all tags defined in the Page Object are passed in with the test" do
