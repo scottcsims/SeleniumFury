@@ -23,6 +23,7 @@ module SeleniumFury
         puts "class #{page_class}"
         page_object=page_class.new(driver)
         raise "Could not find web driver elements in #{page_class}" if page_class.elements.nil?
+        page_source = Nokogiri::HTML(@driver.page_source) if validate_tags.fetch(:verification_type, nil) == :nokogiri
         page_class.elements.each do |web_driver_element_name|
           puts "\tValidating #{web_driver_element_name}"
           begin
@@ -44,11 +45,20 @@ module SeleniumFury
                                else
                                  true
                              end
-          if validate_element && !element_obj.present?
-            puts "\t\t\tCould not find #{web_driver_element_name}"
-            missing_elements.push(web_driver_element_name)
+          if validate_element
+            if validate_tags.fetch(:verification_type, nil) == :nokogiri && element_obj.location.keys.first == :css
+              css_value = element_obj.location.invert.keys.first
+              element_present = page_source.css(css_value).size >= 1
+            else
+              element_present = element_obj.present?
+            end
+            unless element_present
+              puts "\t\t\tCould not find #{web_driver_element_name}"
+              missing_elements.push(web_driver_element_name)
+            end
+          else
+            skipped_elements.push(web_driver_element_name)
           end
-          skipped_elements.push(web_driver_element_name) unless validate_element
         end
         if missing_elements.length > 0
           puts "Missing Elements:"
