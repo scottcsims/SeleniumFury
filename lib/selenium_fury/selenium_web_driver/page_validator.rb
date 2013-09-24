@@ -23,7 +23,7 @@ module SeleniumFury
         puts "class #{page_class}"
         page_object=page_class.new(driver)
         raise "Could not find web driver elements in #{page_class}" if page_class.elements.nil?
-        page_source = Nokogiri::HTML(@driver.page_source)
+        page_source = Nokogiri::HTML(@driver.page_source) if validate_tags.fetch(:verification_type, nil) == :nokogiri
         page_class.elements.each do |web_driver_element_name|
           puts "\tValidating #{web_driver_element_name}"
           begin
@@ -46,18 +46,11 @@ module SeleniumFury
                                  true
                              end
           if validate_element
-            if element_obj.location.keys.first != :id && element_obj.location.keys.first != :css
-              element_present = element_obj.present?
-              # Per spec, IDs should not have periods, but some do
-              # Theoretically Nokogiri should be able to escape them, but it can't
-            elsif element_obj.location.keys.first == :id && element_obj.location[:id].include?('.')
-              element_present = element_obj.present?
-            elsif element_obj.location.keys.first == :id
-              css_value = "##{element_obj.location.invert.keys.first}"
-              element_present = page_source.css(css_value).size >= 1
-            else
+            if validate_tags.fetch(:verification_type, nil) == :nokogiri && element_obj.location.keys.first == :css
               css_value = element_obj.location.invert.keys.first
               element_present = page_source.css(css_value).size >= 1
+            else
+              element_present = element_obj.present?
             end
             unless element_present
               puts "\t\t\tCould not find #{web_driver_element_name}"
