@@ -77,6 +77,7 @@ module ElementWaitHelpers
 
   # Raises error if not present
   def wait_visible!(timeout=@wait)
+    self.el
     wait_for(timeout: timeout, message: "Element at #{location} is not visible") { visible? }
   end
 
@@ -86,6 +87,7 @@ module ElementWaitHelpers
 
   # Raises error if not present
   def wait_not_visible!(timeout=@wait)
+    self.el
     wait_for(timeout: timeout, message: "Element at #{location} is still visible") { !visible? }
   end
 end

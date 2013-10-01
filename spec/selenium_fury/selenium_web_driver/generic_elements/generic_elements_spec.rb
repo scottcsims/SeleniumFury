@@ -316,7 +316,7 @@ describe PageObject do
       it 'should error on missing element if specify !' do
         start_time = Time.now
         expect { test_page.not_a_element.wait_visible! }.
-            to raise_exception(RuntimeError, "Locator at #{test_page.not_a_element.location.to_s} is not present")
+            to raise_exception(Selenium::WebDriver::Error::NoSuchElementError)
         (Time.now-start_time).should < 1
       end
 
