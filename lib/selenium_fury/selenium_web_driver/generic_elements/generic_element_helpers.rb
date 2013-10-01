@@ -1,7 +1,6 @@
 module GenericElementHelpers
   def el
-    raise "Locator at #{location} is not present" unless present?
-    @driver.find_element(location)
+    @driver.find_element location
   end
 
   def list
