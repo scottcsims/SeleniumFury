@@ -29,8 +29,8 @@ module GenericElementHelpers
     el.attribute('value')
   end
 
-  def move_to
-    @driver.action.move_to(el).perform
+  def move_to right_by = nil, down_by = nil
+    @driver.action.move_to(el, right_by, down_by).perform
   end
 
   def double_click
