@@ -99,9 +99,11 @@ module CheckboxElementHelpers
 end
 
 module DropDownHelpers
-  def selected_option_text
+  def selected_option
     Selenium::WebDriver::Support::Select.new(el).first_selected_option.text
   end
+
+  alias_method :selected_option_text, :selected_option  # backwards compatibility
 
   def selected_option_value
     Selenium::WebDriver::Support::Select.new(el).first_selected_option['value']
