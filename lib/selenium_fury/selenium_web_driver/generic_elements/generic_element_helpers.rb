@@ -99,8 +99,12 @@ module CheckboxElementHelpers
 end
 
 module DropDownHelpers
-  def selected_option
+  def selected_option_text
     Selenium::WebDriver::Support::Select.new(el).first_selected_option.text
+  end
+
+  def selected_option_value
+    Selenium::WebDriver::Support::Select.new(el).first_selected_option['value']
   end
 
   # how can be :text, :index, :value
