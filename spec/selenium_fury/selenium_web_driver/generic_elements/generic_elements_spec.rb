@@ -145,6 +145,12 @@ describe PageObject do
       test_page.select_element.selected_option_text.should == 'Audi'
     end
 
+    it 'should be able to grab a dropdowns selected option' do
+      test_page.select_element.select_option(:value, 'mercedes')
+      test_page.select_element.selected_option.should_not be_nil
+      test_page.select_element.selected_option.should be_a Selenium::WebDriver::Element
+    end
+
     it 'should be able grab a dropdowns selected options text' do
       test_page.select_element.select_option(:value, 'mercedes')
       test_page.select_element.selected_option_text.should == 'Mercedes'
