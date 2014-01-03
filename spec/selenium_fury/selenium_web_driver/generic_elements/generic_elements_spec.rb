@@ -131,19 +131,41 @@ describe PageObject do
 
     it 'should select from a dropdown by value' do
       test_page.select_element.select_option(:value, 'mercedes')
-      test_page.select_element.selected_option.should == 'Mercedes'
+      test_page.select_element.selected_option_text.should == 'Mercedes'
     end
 
     it 'should select from a dropdown by text' do
       what = 'Mercedes'
       test_page.select_element.select_option(:text, what)
-      test_page.select_element.selected_option.should == what
+      test_page.select_element.selected_option_text.should == what
     end
 
     it 'should select from a dropdown by index' do
       test_page.select_element.select_option(:index, 3)
-      test_page.select_element.selected_option.should == 'Audi'
+      test_page.select_element.selected_option_text.should == 'Audi'
     end
+
+    it 'should be able to grab a dropdowns selected option' do
+      test_page.select_element.select_option(:value, 'mercedes')
+      test_page.select_element.selected_option.should_not be_nil
+      test_page.select_element.selected_option.should be_a Selenium::WebDriver::Element
+    end
+
+    it 'should be able grab a dropdowns selected options text' do
+      test_page.select_element.select_option(:value, 'mercedes')
+      test_page.select_element.selected_option_text.should == 'Mercedes'
+    end
+
+    it 'should be able to grab a dropdowns selected options value' do
+      test_page.select_element.select_option(:text, 'Saab')
+      test_page.select_element.selected_option_value.should == 'saab'
+    end
+
+    it 'should be able to grab a dropdowns selected options index' do
+      test_page.select_element.select_option(:text, 'Saab')
+      test_page.select_element.selected_option_index.should == 1
+    end
+
   end
 
 
