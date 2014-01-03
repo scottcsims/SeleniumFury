@@ -145,14 +145,19 @@ describe PageObject do
       test_page.select_element.selected_option_text.should == 'Audi'
     end
 
-    it 'should be able grab a dropdown selected text' do
+    it 'should be able grab a dropdowns selected options text' do
       test_page.select_element.select_option(:value, 'mercedes')
       test_page.select_element.selected_option_text.should == 'Mercedes'
     end
 
-    it 'should be able to grab a dropdown selected value' do
+    it 'should be able to grab a dropdowns selected options value' do
       test_page.select_element.select_option(:text, 'Saab')
       test_page.select_element.selected_option_value.should == 'saab'
+    end
+
+    it 'should be able to grab a dropdowns selected options index' do
+      test_page.select_element.select_option(:text, 'Saab')
+      test_page.select_element.selected_option_index.should == 1
     end
 
   end
