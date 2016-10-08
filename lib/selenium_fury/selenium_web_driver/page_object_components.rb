@@ -46,7 +46,7 @@ module SeleniumFury
           end
 
           # keep a running track of all elements and transient elements
-          elements << element_sym
+          elements << element_sym unless elements.include? element_sym
           #@transient_elements << element_hash if opts[:transient]
         end
 
