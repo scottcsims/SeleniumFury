@@ -51,3 +51,5 @@ Copyright
 * Copyright (c) 2012 HomeAway, Inc.
 * All rights reserved.  http://www.homeaway.com
   See LICENSE for details.
+  
+  [![](https://codescene.io/projects/2873/status.svg) Get more details at **codescene.io**.](https://codescene.io/projects/2873/jobs/latest-successful/results)
